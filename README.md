@@ -3,7 +3,7 @@
 ## Modflow Results Viewer for Territorial and Inteligence Analysis System
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-webmap?color=blue">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-mfview?color=blue">
 
   <a href="https://github.com/pimentafm">
     <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-blue">
@@ -25,7 +25,7 @@
 
 *nodejs dependencies can be found in `package.json`.
 
-Set dbconfig.ini in the `/obahia-webmap/api` folder:
+Set dbconfig.ini in the `/obahia-mfview/api` folder:
 
 ```ini
 host=localhost
@@ -35,7 +35,7 @@ user=postgres
 password=postgres
 ```
 
-Set dbconfig.map in the `/obahia-webmap/mapfiles/includes` folder:
+Set dbconfig.map in the `/obahia-mfview/mapfiles/includes` folder:
 
 ```
 CONNECTIONTYPE postgis
