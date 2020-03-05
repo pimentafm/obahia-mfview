@@ -1,0 +1,30 @@
+CLASSITEM "[pixel]"
+    CLASS
+        NAME "< 600 m"
+        EXPRESSION ( [pixel] < 600 )
+        STYLE
+            COLORRANGE 0 0 0 255 255 0
+            DATARANGE 0 600
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME " 600 - 800 m"
+        EXPRESSION ( [pixel] >= 600 AND [pixel] <= 800 )
+        STYLE
+            COLORRANGE 255 255 0 0 255 0
+            DATARANGE 600.001 800
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME "> 800"
+        EXPRESSION ( [pixel] > 800 )
+        STYLE
+            COLORRANGE 0 255 0 0 0 255
+            DATARANGE 800.001 1000
+            RANGEITEM "pixel"
+            SIZE 10
+        END
+    END
+END
