@@ -1,0 +1,29 @@
+CLASSITEM "[pixel]"
+    CLASS
+        NAME "0 - 0.005 (m/d)/m"
+        EXPRESSION ( [pixel] >= 0 AND [pixel] <= 0.005 )
+        STYLE
+            COLORRANGE 68 1 84 49 104 142
+            DATARANGE 0 0.005
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME " 0.005 - 0.04 (m/d)/m"
+        EXPRESSION ( [pixel] > 0.005 AND [pixel] <= 0.04 )
+        STYLE
+            COLORRANGE 49 104 142 53 183 121
+            DATARANGE 0.005 0.04
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME "0.04 - 0.2 (m/d)/m"
+        EXPRESSION ( [pixel] > 0.04 AND [pixel] <= 0.2 )
+        STYLE
+            COLORRANGE 53 183 121 253 231 37
+            DATARANGE 0.04 0.2
+            RANGEITEM "pixel"
+        END
+    END
+END

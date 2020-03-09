@@ -1,5 +1,5 @@
 MAP
-    NAME "Botm"
+    NAME "Hy"
     EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
     SIZE 450 650
 
@@ -7,7 +7,7 @@ MAP
         IMAGEPATH "/tmp/"
 	    IMAGEURL "/tmp/"
         METADATA
-            "wms_title" "Botm"
+            "wms_title" "Hy"
             "wms_onlineresource" "http://corrente.dea.ufv.br/cgi-bin/mapserv?"
             "wms_enable_request" "*"
             "wms_feature_info_mime_type" "text/html"
@@ -17,7 +17,7 @@ MAP
 
     LEGEND
         STATUS on
-        KEYSIZE 60 20
+        KEYSIZE 100 20
         KEYSPACING 6 6 
         LABEL
             TYPE TRUETYPE
@@ -27,7 +27,7 @@ MAP
             OUTLINECOLOR 255 255 255
             ANTIALIAS true
         END
-        TEMPLATE "templates/botmLegend.html"
+        TEMPLATE "templates/templateLegend.html"
     END
 
     PROJECTION
@@ -37,7 +37,7 @@ MAP
     END
 
     LAYER
-        NAME "Botm"
+        NAME "Hy"
         STATUS DEFAULT
         TYPE RASTER
         DUMP TRUE
@@ -47,8 +47,8 @@ MAP
         "ws" "^[a-zA-Z\-]+$"
         END
 
-        DATA "../../geodb/modflow/%ws%/%ws%_botm_1.tif"
+        DATA "../../geodb/modflow/%ws%/%ws%_hy_3.tif"
 
-        INCLUDE "includes/style_botm_1.map"
+        INCLUDE "includes/style_hy.map"
     END
 END

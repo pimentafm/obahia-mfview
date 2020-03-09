@@ -1,0 +1,29 @@
+CLASSITEM "[pixel]"
+    CLASS
+        NAME "0 - 40 m"
+        EXPRESSION ( [pixel] >= 0 AND [pixel] <= 40 )
+        STYLE
+            COLORRANGE 68 1 84 81 174 236
+            DATARANGE 0 40
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME " 40 - 80 m"
+        EXPRESSION ( [pixel] > 40 AND [pixel] <= 80 )
+        STYLE
+            COLORRANGE 49 104 142 53 183 121
+            DATARANGE 40 80
+            RANGEITEM "pixel"
+        END
+    END
+    CLASS
+        NAME "80 - 210 m"
+        EXPRESSION ( [pixel] > 80 AND [pixel] <= 210 )
+        STYLE
+            COLORRANGE 53 183 121 253 231 37
+            DATARANGE 80 210
+            RANGEITEM "pixel"
+        END
+    END
+END
