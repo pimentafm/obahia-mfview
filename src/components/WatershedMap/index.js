@@ -32,26 +32,56 @@ const DrainageMap = props => {
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState([]);
   const [zoom, setZoom] = useState([]);
-  const [botm] = useState(new TileLayer());
+  const [botm1] = useState(new TileLayer());
+  const [botm2] = useState(new TileLayer());
+  const [botm3] = useState(new TileLayer());
   const [stackImage, setStackImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
-  const botm_source = new TileWMS({
+  const botm1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm1.map",
     params: {
       ws: defaultWatershed,
-      LAYERS: "botm"
+      LAYERS: "Botm"
     },
     serverType: "mapserver"
   });
 
-  botm.setSource(botm_source);
-  botm.getSource().updateParams({ time: Date.now() });
-  botm.changed();
-  botm.setSource(botm_source);
-  botm.getSource().updateParams({ time: Date.now() });
-  botm.changed();
+  const botm2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Botm"
+    },
+    serverType: "mapserver"
+  });
+
+  const botm3_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm3.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Botm"
+    },
+    serverType: "mapserver"
+  });
+
+  botm1.setSource(botm1_source);
+  botm1.getSource().updateParams({ time: Date.now() });
+  botm1.changed();
+  botm2.setSource(botm2_source);
+  botm2.getSource().updateParams({ time: Date.now() });
+  botm2.changed();
+  botm3.setSource(botm3_source);
+  botm3.getSource().updateParams({ time: Date.now() });
+  botm3.changed();
+
+  console.log(botm1)
+
+  botm2.setVisible(false);
+  botm3.setVisible(false);
 
   const view = new View({
     projection: "EPSG:4326",
@@ -64,7 +94,7 @@ const DrainageMap = props => {
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, botm],
+    layers: [osm, botm3, botm2, botm1],
     view: view,
     interactions: defaults({
       keyboard: false
@@ -77,8 +107,16 @@ const DrainageMap = props => {
     map.setTarget("map");
   }, [props.center, props.zoom, map]);
 
-  const onOffbotm = evt => {
-    botm.setVisible(evt);
+  const onOffbotm1 = evt => {
+    botm1.setVisible(evt);
+  };
+
+  const onOffbotm2 = evt => {
+    botm2.setVisible(evt);
+  };
+
+  const onOffbotm3 = evt => {
+    botm3.setVisible(evt);
   };
 
   const handleWatersheds = ws => {
@@ -145,7 +183,9 @@ const DrainageMap = props => {
         handleWatersheds={handleWatersheds}
         defaultWatershed={defaultWatershed}
         defaultCategory={defaultCategory}
-        onOffbotm={onOffbotm}
+        onOffbotm1={onOffbotm1}
+        onOffbotm2={onOffbotm2}
+        onOffbotm3={onOffbotm3}
         map={map}
       />
 

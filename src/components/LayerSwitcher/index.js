@@ -11,7 +11,7 @@ const LayerSwitcher = props => {
     const [legend_is_visible, setLegendVisible] = useState(props.legend);
     const [switcher] = useState(props.switcher);
     const [name] = useState(props.name);
-
+    
     const handleLegend = () => {
         if(legend_is_visible === true) {
             setLegendVisible(false);
@@ -22,7 +22,7 @@ const LayerSwitcher = props => {
 
     let legend;
 
-    if (legend_is_visible && checked) {
+    if (legend_is_visible) {
         legend = <Legend />
     } else {
         legend = null;

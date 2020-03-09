@@ -73,11 +73,26 @@ const Menu = props => {
       {watershedSelect}
 
       <LayerSwitcher
-        name="botm"
+        name="botm1"
         checked={true}
         legend={true}
-        switcher={() => props.onOffbotm}
+        switcher={() => props.onOffbotm1}
       />
+
+      <LayerSwitcher
+        name="botm2"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffbotm2}
+      />
+
+      <LayerSwitcher
+        name="botm3"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffbotm3}
+      />
+
       <Button id="report-button"
         title="Gera relatório"
         onClick={props.handleReport}
