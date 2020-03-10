@@ -1,5 +1,5 @@
 {
-  "name": "webmap",
+  "name": "mfview",
   "version": "0.1.0",
   "homepage": "http://ucayali.dea.ufv.br/webmap",
   "proxy": "http://ucayali.dea.ufv.br:80",
