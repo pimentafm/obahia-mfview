@@ -32,9 +32,9 @@ const DrainageMap = props => {
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState([]);
   const [zoom, setZoom] = useState([]);
-  const [botm1] = useState(new TileLayer());
-  const [botm2] = useState(new TileLayer());
-  const [botm3] = useState(new TileLayer());
+  const [botm] = useState([new TileLayer({name: "botm1"}), new TileLayer({name: "botm2", visible: false}), new TileLayer({name: "botm3", visible: false})]);
+  const [hy] = useState([new TileLayer({name: "hy1", visible: false}), new TileLayer({name: "hy2", visible: false}), new TileLayer({name: "hy3", visible: false})]);
+
   const [stackImage, setStackImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
@@ -68,20 +68,55 @@ const DrainageMap = props => {
     serverType: "mapserver"
   });
 
-  botm1.setSource(botm1_source);
-  botm1.getSource().updateParams({ time: Date.now() });
-  botm1.changed();
-  botm2.setSource(botm2_source);
-  botm2.getSource().updateParams({ time: Date.now() });
-  botm2.changed();
-  botm3.setSource(botm3_source);
-  botm3.getSource().updateParams({ time: Date.now() });
-  botm3.changed();
+  const hy1_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy1.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Hy"
+    },
+    serverType: "mapserver"
+  });
 
-  console.log(botm1)
+  const hy2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Hy"
+    },
+    serverType: "mapserver"
+  });
 
-  botm2.setVisible(false);
-  botm3.setVisible(false);
+  const hy3_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy3.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Hy"
+    },
+    serverType: "mapserver"
+  });
+
+  botm[0].setSource(botm1_source);
+  botm[0].getSource().updateParams({ time: Date.now() });
+  botm[0].changed();
+  botm[1].setSource(botm2_source);
+  botm[1].getSource().updateParams({ time: Date.now() });
+  botm[1].changed();
+  botm[2].setSource(botm3_source);
+  botm[2].getSource().updateParams({ time: Date.now() });
+  botm[2].changed();
+
+  hy[0].setSource(hy1_source);
+  hy[0].getSource().updateParams({ time: Date.now() });
+  hy[0].changed();
+  hy[1].setSource(hy2_source);
+  hy[1].getSource().updateParams({ time: Date.now() });
+  hy[1].changed();
+  hy[2].setSource(hy3_source);
+  hy[2].getSource().updateParams({ time: Date.now() });
+  hy[2].changed();
 
   const view = new View({
     projection: "EPSG:4326",
@@ -94,7 +129,7 @@ const DrainageMap = props => {
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, botm3, botm2, botm1],
+    layers: [osm, hy[2], hy[1], hy[0], botm[2], botm[1], botm[0]],
     view: view,
     interactions: defaults({
       keyboard: false
@@ -106,18 +141,6 @@ const DrainageMap = props => {
     map.getView().setZoom(props.zoom);
     map.setTarget("map");
   }, [props.center, props.zoom, map]);
-
-  const onOffbotm1 = evt => {
-    botm1.setVisible(evt);
-  };
-
-  const onOffbotm2 = evt => {
-    botm2.setVisible(evt);
-  };
-
-  const onOffbotm3 = evt => {
-    botm3.setVisible(evt);
-  };
 
   const handleWatersheds = ws => {
     setWatershed(ws);
@@ -173,6 +196,15 @@ const DrainageMap = props => {
     }
   };
 
+  const onOffLayers = (evt, obj) => {
+    const lyr_name = obj.target.name;
+    map.getLayers().forEach(lyr => {
+      if (lyr.get('name') === lyr_name) {
+        lyr.setVisible(!lyr.get('visible'));
+      }
+    });
+  };
+
   return (
     <MapContainer id="map">
       <Menu
@@ -183,9 +215,7 @@ const DrainageMap = props => {
         handleWatersheds={handleWatersheds}
         defaultWatershed={defaultWatershed}
         defaultCategory={defaultCategory}
-        onOffbotm1={onOffbotm1}
-        onOffbotm2={onOffbotm2}
-        onOffbotm3={onOffbotm3}
+        onOffLayers={onOffLayers}
         map={map}
       />
 

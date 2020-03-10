@@ -32,7 +32,7 @@ const LayerSwitcher = props => {
         <LayerContainer legend_is_visible={legend_is_visible}>
             <div className="layer-div">
                 <label>{name}</label>
-                <Switch defaultChecked={checked} onClick={handleLegend} onChange={switcher} />
+                <Switch name={name} defaultChecked={checked} onClick={handleLegend} onChange={switcher} />
             </div>
                 
             {legend}

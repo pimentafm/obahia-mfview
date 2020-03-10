@@ -76,21 +76,42 @@ const Menu = props => {
         name="botm1"
         checked={true}
         legend={true}
-        switcher={() => props.onOffbotm1}
+        switcher={() => props.onOffLayers}
       />
 
       <LayerSwitcher
         name="botm2"
         checked={false}
         legend={false}
-        switcher={() => props.onOffbotm2}
+        switcher={() => props.onOffLayers}
       />
 
       <LayerSwitcher
         name="botm3"
         checked={false}
         legend={false}
-        switcher={() => props.onOffbotm3}
+        switcher={() => props.onOffLayers}
+      />
+
+      <LayerSwitcher
+        name="hy1"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
+      />
+
+      <LayerSwitcher
+        name="hy2"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
+      />
+
+      <LayerSwitcher
+        name="hy3"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
       />
 
       <Button id="report-button"
