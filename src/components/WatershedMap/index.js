@@ -32,16 +32,30 @@ const DrainageMap = props => {
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState([]);
   const [zoom, setZoom] = useState([]);
-  const [botm] = useState([new TileLayer({name: "botm1"}), new TileLayer({name: "botm2", visible: false}), new TileLayer({name: "botm3", visible: false})]);
-  const [hy] = useState([new TileLayer({name: "hy1", visible: false}), new TileLayer({name: "hy2", visible: false}), new TileLayer({name: "hy3", visible: false})]);
+  const [botm] = useState([new TileLayer({name: "botm_1", visible: false}), new TileLayer({name: "botm_2", visible: false}), new TileLayer({name: "botm_3", visible: false})]);
+  const [hy] = useState([new TileLayer({name: "hy_1", visible: false}), new TileLayer({name: "hy_2", visible: false}), new TileLayer({name: "hy_3", visible: false})]);
   const [sf1] = useState([new TileLayer({name: "sf1_1", visible: false}), new TileLayer({name: "sf1_2", visible: false}), new TileLayer({name: "sf1_3", visible: false})]);
+  const [strt] = useState([new TileLayer({name: "strt_1", visible: false}), new TileLayer({name: "strt_2", visible: false}), new TileLayer({name: "strt_3", visible: false})]);
+  const [tkness] = useState([new TileLayer({name: "tkness_1", visible: false}), new TileLayer({name: "tkness_2", visible: false}), new TileLayer({name: "tkness_3", visible: false})]);
+  const [top] = useState(new TileLayer({name: "top", visible: true}));
+  const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
 
   const [stackImage, setStackImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
+  const top_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/top.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Top"
+    },
+    serverType: "mapserver"
+  });
+
   const botm1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm1.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -51,7 +65,7 @@ const DrainageMap = props => {
 
   const botm2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm2.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -61,7 +75,7 @@ const DrainageMap = props => {
 
   const botm3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm3.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -71,7 +85,7 @@ const DrainageMap = props => {
 
   const hy1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy1.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -81,7 +95,7 @@ const DrainageMap = props => {
 
   const hy2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy2.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -91,7 +105,7 @@ const DrainageMap = props => {
 
   const hy3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy3.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -129,6 +143,90 @@ const DrainageMap = props => {
     serverType: "mapserver"
   });
 
+  const strt1_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_1.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Strt"
+    },
+    serverType: "mapserver"
+  });
+
+  const strt2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Strt"
+    },
+    serverType: "mapserver"
+  });
+
+  const strt3_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_3.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Strt"
+    },
+    serverType: "mapserver"
+  });
+
+  const tkness1_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_1.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Tkness"
+    },
+    serverType: "mapserver"
+  });
+
+  const tkness2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Tkness"
+    },
+    serverType: "mapserver"
+  });
+
+  const tkness3_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_3.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Tkness"
+    },
+    serverType: "mapserver"
+  });
+
+  const vcont1_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/vcont_1.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Vcont"
+    },
+    serverType: "mapserver"
+  });
+
+  const vcont2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/vcont_2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Vcont"
+    },
+    serverType: "mapserver"
+  });
+
+  top.setSource(top_source);
+  top.getSource().updateParams({ time: Date.now() });
+  top.changed();
+
   botm[0].setSource(botm1_source);
   botm[0].getSource().updateParams({ time: Date.now() });
   botm[0].changed();
@@ -159,6 +257,33 @@ const DrainageMap = props => {
   sf1[2].getSource().updateParams({ time: Date.now() });
   sf1[2].changed();
 
+  strt[0].setSource(strt1_source);
+  strt[0].getSource().updateParams({ time: Date.now() });
+  strt[0].changed();
+  strt[1].setSource(strt2_source);
+  strt[1].getSource().updateParams({ time: Date.now() });
+  strt[1].changed();
+  strt[2].setSource(strt3_source);
+  strt[2].getSource().updateParams({ time: Date.now() });
+  strt[2].changed();
+
+  tkness[0].setSource(tkness1_source);
+  tkness[0].getSource().updateParams({ time: Date.now() });
+  tkness[0].changed();
+  tkness[1].setSource(tkness2_source);
+  tkness[1].getSource().updateParams({ time: Date.now() });
+  tkness[1].changed();
+  tkness[2].setSource(tkness3_source);
+  tkness[2].getSource().updateParams({ time: Date.now() });
+  tkness[2].changed();
+
+  vcont[0].setSource(vcont1_source);
+  vcont[0].getSource().updateParams({ time: Date.now() });
+  vcont[0].changed();
+  vcont[1].setSource(vcont2_source);
+  vcont[1].getSource().updateParams({ time: Date.now() });
+  vcont[1].changed();
+
   const view = new View({
     projection: "EPSG:4326",
     center: center,
@@ -170,7 +295,7 @@ const DrainageMap = props => {
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, sf1[2], sf1[1], sf1[0], hy[2], hy[1], hy[0], botm[2], botm[1], botm[0]],
+    layers: [osm, vcont[0], vcont[1], tkness[2], tkness[1], tkness[0], strt[2], strt[1], strt[0], sf1[2], sf1[1], sf1[0], hy[2], hy[1], hy[0], botm[2], botm[1], botm[0], top],
     view: view,
     interactions: defaults({
       keyboard: false

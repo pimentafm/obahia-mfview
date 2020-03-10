@@ -73,43 +73,57 @@ const Menu = props => {
       {watershedSelect}
 
       <div id="layer-div">
-        <LayerSwitcher
-          name="botm1"
+      <LayerSwitcher
+          name="top"
+          label="Elevação no topo do modelo"
           checked={true}
           legend={true}
           switcher={() => props.onOffLayers}
         />
 
         <LayerSwitcher
-          name="botm2"
+          name="botm_1"
+          label="Elevação na primeira camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
         />
 
         <LayerSwitcher
-          name="botm3"
+          name="botm_2"
+          label="Elevação na segunda camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
         />
 
         <LayerSwitcher
-          name="hy1"
+          name="botm_3"
+          label="Elevação na terceira camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
         />
 
         <LayerSwitcher
-          name="hy2"
+          name="hy_1"
+          label="Condutividade hidŕaulica na 1ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
         />
 
         <LayerSwitcher
-          name="hy3"
+          name="hy_2"
+          label="Condutividade hidŕaulica na 2ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="hy_3"
+          label="Condutividade hidŕaulica na 3ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -117,6 +131,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="sf1_1"
+          label="Coeficiente de armazenamento primário na 1ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -124,6 +139,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="sf1_2"
+          label="Coeficiente de armazenamento primário na 2ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -131,6 +147,71 @@ const Menu = props => {
 
         <LayerSwitcher
           name="sf1_3"
+          label="Coeficiente de armazenamento primário na 3ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="strt_1"
+          label="Cabeceira inicial da 1ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="strt_2"
+          label="Cabeceira inicial da 2ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="strt_3"
+          label="Cabeceira inicial da 3ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="tkness_1"
+          label="Expessura da 1ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="tkness_2"
+          label="Expessura da 2ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="tkness_3"
+          label="Expessura da 3ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="vcont_1"
+          label="Condutância vertical na 1ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="vcont_2"
+          label="Condutância vertical na 2ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
