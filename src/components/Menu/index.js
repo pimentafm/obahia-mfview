@@ -72,68 +72,71 @@ const Menu = props => {
       {watershedsLabel}
       {watershedSelect}
 
-      <LayerSwitcher
-        name="botm1"
-        checked={true}
-        legend={true}
-        switcher={() => props.onOffLayers}
-      />
+      <div id="layer-div">
+        <LayerSwitcher
+          name="botm1"
+          checked={true}
+          legend={true}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="botm2"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="botm2"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="botm3"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="botm3"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="hy1"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="hy1"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="hy2"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="hy2"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="hy3"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="hy3"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="sf1_1"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="sf1_1"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="sf1_2"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="sf1_2"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
 
-      <LayerSwitcher
-        name="sf1_3"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLayers}
-      />
+        <LayerSwitcher
+          name="sf1_3"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+      </div>
+      
 
       <Button id="report-button"
         title="Gera relatório"
