@@ -8,7 +8,7 @@ const Legend = props => {
     const [legendHTML, setlegendHTML] = useState([]);
 
     useEffect(() => {
-        ucayali.get(`cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm1.map&mode=legend`, {
+        ucayali.get(`cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/`+props.name+`.map&mode=legend`, {
             responseType: 'text',
         },
         ).then(res => {
@@ -18,7 +18,7 @@ const Legend = props => {
             
             setlegendHTML(html)
         });
-    }, []);
+    }, [props.name]);
 
     return (
         <LegendContainer>

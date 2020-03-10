@@ -23,7 +23,7 @@ const LayerSwitcher = props => {
     let legend;
 
     if (legend_is_visible) {
-        legend = <Legend />
+        legend = <Legend name={name}/>
     } else {
         legend = null;
     }

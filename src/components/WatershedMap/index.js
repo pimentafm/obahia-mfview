@@ -34,6 +34,7 @@ const DrainageMap = props => {
   const [zoom, setZoom] = useState([]);
   const [botm] = useState([new TileLayer({name: "botm1"}), new TileLayer({name: "botm2", visible: false}), new TileLayer({name: "botm3", visible: false})]);
   const [hy] = useState([new TileLayer({name: "hy1", visible: false}), new TileLayer({name: "hy2", visible: false}), new TileLayer({name: "hy3", visible: false})]);
+  const [sf1] = useState([new TileLayer({name: "sf1_1", visible: false}), new TileLayer({name: "sf1_2", visible: false}), new TileLayer({name: "sf1_3", visible: false})]);
 
   const [stackImage, setStackImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
@@ -98,6 +99,36 @@ const DrainageMap = props => {
     serverType: "mapserver"
   });
 
+  const sf1_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_1.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Sf1"
+    },
+    serverType: "mapserver"
+  });
+
+  const sf2_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_2.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Sf1"
+    },
+    serverType: "mapserver"
+  });
+
+  const sf3_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_3.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "Sf1"
+    },
+    serverType: "mapserver"
+  });
+
   botm[0].setSource(botm1_source);
   botm[0].getSource().updateParams({ time: Date.now() });
   botm[0].changed();
@@ -118,6 +149,16 @@ const DrainageMap = props => {
   hy[2].getSource().updateParams({ time: Date.now() });
   hy[2].changed();
 
+  sf1[0].setSource(sf1_source);
+  sf1[0].getSource().updateParams({ time: Date.now() });
+  sf1[0].changed();
+  sf1[1].setSource(sf2_source);
+  sf1[1].getSource().updateParams({ time: Date.now() });
+  sf1[1].changed();
+  sf1[2].setSource(sf3_source);
+  sf1[2].getSource().updateParams({ time: Date.now() });
+  sf1[2].changed();
+
   const view = new View({
     projection: "EPSG:4326",
     center: center,
@@ -129,7 +170,7 @@ const DrainageMap = props => {
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, hy[2], hy[1], hy[0], botm[2], botm[1], botm[0]],
+    layers: [osm, sf1[2], sf1[1], sf1[0], hy[2], hy[1], hy[0], botm[2], botm[1], botm[0]],
     view: view,
     interactions: defaults({
       keyboard: false

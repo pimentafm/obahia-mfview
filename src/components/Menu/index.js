@@ -114,6 +114,27 @@ const Menu = props => {
         switcher={() => props.onOffLayers}
       />
 
+      <LayerSwitcher
+        name="sf1_1"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
+      />
+
+      <LayerSwitcher
+        name="sf1_2"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
+      />
+
+      <LayerSwitcher
+        name="sf1_3"
+        checked={false}
+        legend={false}
+        switcher={() => props.onOffLayers}
+      />
+
       <Button id="report-button"
         title="Gera relatório"
         onClick={props.handleReport}
