@@ -155,7 +155,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="strt_1"
-          label="Cabeceira inicial da 1ª camada"
+          label="Carga inicial da 1ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -163,7 +163,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="strt_2"
-          label="Cabeceira inicial da 2ª camada"
+          label="Carga inicial da 2ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -171,7 +171,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="strt_3"
-          label="Cabeceira inicial da 3ª camada"
+          label="Carga inicial da 3ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -196,6 +196,14 @@ const Menu = props => {
         <LayerSwitcher
           name="tkness_3"
           label="Expessura da 3ª camada"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+
+        <LayerSwitcher
+          name="tkness_sum"
+          label="Expessura total"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}

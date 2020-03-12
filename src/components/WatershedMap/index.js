@@ -37,6 +37,7 @@ const DrainageMap = props => {
   const [sf1] = useState([new TileLayer({name: "sf1_1", visible: false}), new TileLayer({name: "sf1_2", visible: false}), new TileLayer({name: "sf1_3", visible: false})]);
   const [strt] = useState([new TileLayer({name: "strt_1", visible: false}), new TileLayer({name: "strt_2", visible: false}), new TileLayer({name: "strt_3", visible: false})]);
   const [tkness] = useState([new TileLayer({name: "tkness_1", visible: false}), new TileLayer({name: "tkness_2", visible: false}), new TileLayer({name: "tkness_3", visible: false})]);
+  const [total_tkness] = useState(new TileLayer({name: "tkness_sum", visible: false}));
   const [top] = useState(new TileLayer({name: "top", visible: true}));
   const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
 
@@ -203,6 +204,16 @@ const DrainageMap = props => {
     serverType: "mapserver"
   });
 
+  const totalTkness_source = new TileWMS({
+    url:
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_sum.map",
+    params: {
+      ws: defaultWatershed,
+      LAYERS: "TknessSum"
+    },
+    serverType: "mapserver"
+  });
+
   const vcont1_source = new TileWMS({
     url:
       "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/vcont_1.map",
@@ -277,6 +288,10 @@ const DrainageMap = props => {
   tkness[2].getSource().updateParams({ time: Date.now() });
   tkness[2].changed();
 
+  total_tkness.setSource(totalTkness_source);
+  total_tkness.getSource().updateParams({ time: Date.now() });
+  total_tkness.changed();
+
   vcont[0].setSource(vcont1_source);
   vcont[0].getSource().updateParams({ time: Date.now() });
   vcont[0].changed();
@@ -295,7 +310,7 @@ const DrainageMap = props => {
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, vcont[0], vcont[1], tkness[2], tkness[1], tkness[0], strt[2], strt[1], strt[0], sf1[2], sf1[1], sf1[0], hy[2], hy[1], hy[0], botm[2], botm[1], botm[0], top],
+    layers: [osm, vcont[0], vcont[1], total_tkness, tkness[2], tkness[1], tkness[0], strt[2], strt[1], strt[0], sf1[2], sf1[1], sf1[0], hy[2], hy[1], hy[0], botm[2], botm[1], botm[0], top],
     view: view,
     interactions: defaults({
       keyboard: false
