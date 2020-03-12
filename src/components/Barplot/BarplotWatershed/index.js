@@ -6,40 +6,13 @@ import oba from "~/services/api";
 import { PlotContainer } from "./styles";
 
 const Barplot = props => {
-  const [defaultYear, setYear] = useState([]);
-  const [defaultWatershed, setWatershed] = useState([]);
-  const [landuse, setLanduseData] = useState([]);
-  const [colors] = useState([
-    "#004000",
-    "#77a605",
-    "#b8af4f",
-    "#f6e6db",
-    "#ffcaff",
-    "#ff42f9",
-    "#f4f286",
-    "#0000ff",
-    "#ff0000"
-  ]);
-  const [xaxis] = useState([
-    "Formações florestais",
-    "Formações savânicas",
-    "Formações campestres",
-    "Mosaico Agricultura/Pastagem",
-    "Agricultura de sequeiro",
-    "Agricultura irrigada",
-    "Pastagem",
-    "Corpos dágua",
-    "Área urbana/Construções rurais"
-  ]);
+  const [balanceIn, setBalanceIn] = useState([]);
+  const [balanceOut, setBalanceOut] = useState([]);
+  const [xaxis] = useState(["Armazenamento", "Carga", "Poços", "Drenagens", "Descarga", "Recarga", "Total"]);
 
   useEffect(() => {
-    setYear(props.defaultYear);
-    setWatershed(props.defaultWatershed);
-
     oba
-      .post("gcc/", {
-        year1: props.defaultYear,
-        year2: props.defaultYear,
+      .post("balance/", {
         gcc: props.defaultWatershed,
         table_name: "landuse",
         headers: {
@@ -47,34 +20,39 @@ const Barplot = props => {
         }
       })
       .then(response => {
-        const data = response.data.filter(f => f.classname).map(a => a.areakm2);
-        setLanduseData(data);
+        const data = response.data;
+        //const data = response.data;
+        setBalanceIn(Object.values(data[0]).slice(2));
+        setBalanceOut(Object.values(data[1]).slice(2));
       })
       .catch(e => {
         this.errors.push(e);
       });
-  }, [props.defaultYear, props.defaultWatershed, props.landuse]);
-
+  }, [props.defaultWatershed]);
+  
   return (
     <PlotContainer id="bar-plot">
       <Plot
         data={[
           {
             x: xaxis,
-            y: landuse,
-            stackgroup: "one",
+            y: balanceIn,
+            name: "IN",
             type: "bar",
-            marker: { color: colors }
+            marker: { color: "#0000ff" }
+          },
+          {
+            x: xaxis,
+            y: balanceOut,
+            name: "OUT",
+            type: "bar",
+            marker: { color: "#ff0000" }
           }
         ]}
         layout={{
           title: {
             text:
-              "<b>Cobertura e uso do solo (" +
-              defaultYear +
-              ") - Rio " +
-              defaultWatershed +
-              "</b>",
+              "<b>Balanço - Rio " + props.defaultWatershed[0].toUpperCase() + props.defaultWatershed.slice(1) + "</b>",
             font: {
               family: "Arial, sans-serif",
               size: 14
@@ -82,11 +60,8 @@ const Barplot = props => {
           },
           autosize: false,
           width: 500,
-          height: 300,
+          height: 400,
           xaxis: {
-            title: {
-              text: "Classes"
-            },
             titlefont: {
               family: "Arial, sans-serif",
               size: 12,
@@ -98,13 +73,13 @@ const Barplot = props => {
               color: "black"
             },
             autotick: false,
-            showticklabels: false,
+            showticklabels: true,
             ticks: "outside",
             tickcolor: "#000"
           },
           yaxis: {
             title: {
-              text: "Uso e Cobertura do solo (1000 km²)"
+              text: "Balanço (10<sup>10</sup> m³)"
             },
             titlefont: {
               family: "Arial, sans-serif",
@@ -116,7 +91,6 @@ const Barplot = props => {
               size: 12,
               color: "black"
             },
-
             autotick: false,
             ticks: "outside",
             tick0: 0,
@@ -125,8 +99,8 @@ const Barplot = props => {
             tickwidth: 2,
             tickcolor: "#000"
           },
-          showlegend: false,
-          margin: { l: 60, r: 10, t: 70, b: 50 }
+          showlegend: true,
+          margin: { l: 60, r: 10, t: 70, b: 70 }
         }}
         config={{
           displaylogo: false

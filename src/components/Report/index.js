@@ -106,11 +106,11 @@ const Report = props => {
             <View style={styles.header} fixed>
               <Image style={styles.imageHeader} src="/obahia-webmap/src/assets/images/logo.png"/>
             </View>
-            <Text style={styles.title}>{"Mudanças do uso e cobertura do solo - 1990-2018"}</Text>
+            <Text style={styles.title}>{"Validação do modelo de fluxo para a bacia do Rio " + params.defaultWatershed[0].toUpperCase() + params.defaultWatershed.slice(1)}</Text>
             <Text style={styles.text} >{cat_text}</Text>
-            <Image style={styles.image} src={params.stackImage}/>
+            <Image style={styles.image} src={params.scatterImage}/>
             
-            <Text style={styles.title}>{params.defaultCategory +" - "+ params.defaultYear}</Text>
+            <Text style={styles.title}>{params.defaultCategory}</Text>
             <Text style={styles.text} >{watershed_text}</Text>
             <Image style={styles.image} src={params.barImage}/>
 

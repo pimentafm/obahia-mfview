@@ -226,7 +226,6 @@ const Menu = props => {
         />
       </div>
       
-
       <Button id="report-button"
         title="Gera relatório"
         onClick={props.handleReport}

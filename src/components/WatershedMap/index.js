@@ -17,7 +17,7 @@ import Footer from "~/components/Footer";
 
 import CardPlot from "~/components/CardPlot";
 import Scatterplot from "~/components/Scatterplot/ScatterplotWatershed";
-//import Barplot from "~/components/Barplot/BarplotWatershed";
+import Barplot from "~/components/Barplot/BarplotWatershed";
 
 import CardReport from "~/components/CardReport";
 import Report from "~/components/Report";
@@ -42,7 +42,7 @@ const DrainageMap = props => {
   const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
 
   const [scatterImage, setScatterImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
-  //const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
+  const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
   const top_source = new TileWMS({
     url:
@@ -364,7 +364,7 @@ const DrainageMap = props => {
     .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
-        //setBarImage(img.src);
+        setBarImage(img.src);
     })
     .catch(function (error) {
         console.error('oops, something went wrong when generate BarPlot image!', error);
@@ -409,12 +409,12 @@ const DrainageMap = props => {
             defaultWatershed={defaultWatershed}
           /> 
         }
-       /* barplot={
+        barplot={
           <Barplot
-            key={"barplot" + defaultYear}
+            key={"barplot"}
             defaultWatershed={defaultWatershed}
           />
-        }*/
+        }
       />
 
       <Footer key="footer" map={map} />
@@ -424,9 +424,9 @@ const DrainageMap = props => {
           <Report 
             key="report" 
             params={{
-              defaultCategory,
               defaultWatershed,
-              scatterImage
+              scatterImage,
+              barImage
             }}
           />
         }
