@@ -26,7 +26,7 @@ const Cardplot = props => {
             onClick={() => handlePlots()}
           />
 
-          {props.stackplot}
+          {props.scatterplot}
           {props.barplot}
     </CardContainer>
   );

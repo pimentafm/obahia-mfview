@@ -15,8 +15,8 @@ import Menu from "~/components/Menu";
 import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
-//import CardPlot from "~/components/CardPlot";
-//import Stackplot from "~/components/Stackplot/StackplotWatershed";
+import CardPlot from "~/components/CardPlot";
+import Scatterplot from "~/components/Scatterplot/ScatterplotWatershed";
 //import Barplot from "~/components/Barplot/BarplotWatershed";
 
 import CardReport from "~/components/CardReport";
@@ -28,7 +28,7 @@ const DrainageMap = props => {
   const [defaultWatershed, setWatershed] = useState(props.defaultWatershed);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
-  //const [plotsAreHidden] = useState(false);
+  const [plotsAreHidden] = useState(false);
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState([]);
   const [zoom, setZoom] = useState([]);
@@ -41,8 +41,8 @@ const DrainageMap = props => {
   const [top] = useState(new TileLayer({name: "top", visible: true}));
   const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
 
-  const [stackImage, setStackImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
-  const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
+  const [scatterImage, setScatterImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
+  //const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
   const top_source = new TileWMS({
     url:
@@ -350,21 +350,21 @@ const DrainageMap = props => {
   };
 
   const handleReport = () => {
-    domtoimage.toPng(document.getElementById('stack-plot'))
+    domtoimage.toPng(document.getElementById('scatter-plot'))
     .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
-        setStackImage(img.src);
+        setScatterImage(img.src);
     })
     .catch(function (error) {
-        console.error('oops, something went wrong when generate StackPlot image!', error);
+        console.error('oops, something went wrong when generate ScatterPlot image!', error);
     });
 
     domtoimage.toPng(document.getElementById('bar-plot'))
     .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
-        setBarImage(img.src);
+        //setBarImage(img.src);
     })
     .catch(function (error) {
         console.error('oops, something went wrong when generate BarPlot image!', error);
@@ -401,24 +401,22 @@ const DrainageMap = props => {
       />
 
       <Scalebar key="scalebar" map={map} />
-{/*
+
       <CardPlot plotsAreHidden={plotsAreHidden}
-        stackplot={
-          <Stackplot 
-            key="stackplot" 
+        scatterplot={
+          <Scatterplot 
+            key="scatterplot" 
             defaultWatershed={defaultWatershed}
-            defaultYear={defaultYear}
           /> 
         }
-        barplot={
+       /* barplot={
           <Barplot
             key={"barplot" + defaultYear}
             defaultWatershed={defaultWatershed}
-            defaultYear={defaultYear}
           />
-        }
+        }*/
       />
-*/}
+
       <Footer key="footer" map={map} />
 
       <CardReport reportIsHidden={reportIsHidden}
@@ -428,8 +426,7 @@ const DrainageMap = props => {
             params={{
               defaultCategory,
               defaultWatershed,
-              stackImage,
-              barImage
+              scatterImage
             }}
           />
         }
