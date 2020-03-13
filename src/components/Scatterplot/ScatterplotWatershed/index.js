@@ -99,9 +99,9 @@ const Scatterplot = props => {
             y: l2_calc,
             mode: 'markers',
             marker: {
-              symbol: 'triangle-up',
+              symbol: 'circle',
               size: 10,
-              color: "#ff0000"
+              color: "#0000ff"
             },
             type: "scatter",
             name: 'L2'
@@ -111,9 +111,9 @@ const Scatterplot = props => {
             y: l1_calc,
             mode: 'markers',
             marker: {
-              symbol: 'triangle-up',
+              symbol: 'square',
               size: 10,
-              color: "#0000ff"
+              color: "#ff0000"
             },
             type: "scatter",
             name: 'L1'
