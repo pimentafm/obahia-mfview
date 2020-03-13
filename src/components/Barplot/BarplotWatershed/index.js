@@ -94,7 +94,7 @@ const Barplot = props => {
             autotick: false,
             ticks: "outside",
             tick0: 0,
-            dtick: 3,
+            dtick: 2,
             ticklen: 8,
             tickwidth: 2,
             tickcolor: "#000"
