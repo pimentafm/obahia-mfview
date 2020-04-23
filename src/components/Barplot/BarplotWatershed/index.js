@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-import oba from "~/services/api";
+import odb from "~/services/obahiadb";
 
 import { PlotContainer } from "./styles";
 
@@ -11,7 +11,7 @@ const Barplot = props => {
   const [xaxis] = useState(["Armazenamento", "Carga", "Poços", "Drenagens", "Descarga", "Recarga", "Total"]);
 
   useEffect(() => {
-    oba
+    odb
       .post("balance/", {
         gcc: props.defaultWatershed,
         table_name: "landuse",

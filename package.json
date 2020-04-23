@@ -1,8 +1,8 @@
 {
   "name": "mfview",
   "version": "0.1.0",
-  "homepage": "http://ucayali.dea.ufv.br/mfview",
-  "proxy": "http://ucayali.dea.ufv.br:80",
+  "homepage": "http://obahia.dea.ufv.br",
+  "proxy": "http://obahia.dea.ufv.br:8085",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^1.6.8",

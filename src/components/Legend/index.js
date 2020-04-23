@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import ucayali from '~/services/local';
+import lgd from '~/services/legend';
 
 import { LegendContainer } from './styles';
 
@@ -8,7 +8,7 @@ const Legend = props => {
     const [legendHTML, setlegendHTML] = useState([]);
 
     useEffect(() => {
-        ucayali.get(`cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/`+props.name+`.map&mode=legend`, {
+        lgd.get(`cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/`+props.name+`.map&mode=legend`, {
             responseType: 'text',
         },
         ).then(res => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-import oba from "~/services/api";
+import odb from "~/services/obahiadb";
 
 import { PlotContainer } from "./styles";
 
@@ -15,7 +15,7 @@ const Scatterplot = props => {
   const [l3_calc, setL3calc] = useState(null);
 
   useEffect(() => {
-    oba
+    odb
       .post("validation/", {
         gcc: props.defaultWatershed,
         table_name: "validation_gcc",

@@ -6,7 +6,7 @@ import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 import { defaults } from 'ol/interaction';
 
-import oba from "~/services/api";
+import odb from "~/services/obahiadb";
 
 import "ol/ol.css";
 
@@ -44,9 +44,10 @@ const DrainageMap = props => {
   const [scatterImage, setScatterImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-mfview/src/assets/images/image-loading.png");
 
+  const base_URL = "http://obahia.dea.ufv.br:8085/"
+
   const top_source = new TileWMS({
-    url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/top.map",
+    url: base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/top.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Top"
@@ -56,7 +57,7 @@ const DrainageMap = props => {
 
   const botm1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/botm_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -66,7 +67,7 @@ const DrainageMap = props => {
 
   const botm2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/botm_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -76,7 +77,7 @@ const DrainageMap = props => {
 
   const botm3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/botm_3.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/botm_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Botm"
@@ -86,7 +87,7 @@ const DrainageMap = props => {
 
   const hy1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/hy_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -96,7 +97,7 @@ const DrainageMap = props => {
 
   const hy2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/hy_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -106,7 +107,7 @@ const DrainageMap = props => {
 
   const hy3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/hy_3.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/hy_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Hy"
@@ -116,7 +117,7 @@ const DrainageMap = props => {
 
   const sf1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/sf1_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Sf1"
@@ -126,7 +127,7 @@ const DrainageMap = props => {
 
   const sf2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/sf1_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Sf1"
@@ -136,7 +137,7 @@ const DrainageMap = props => {
 
   const sf3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/sf1_3.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/sf1_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Sf1"
@@ -146,7 +147,7 @@ const DrainageMap = props => {
 
   const strt1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/strt_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Strt"
@@ -156,7 +157,7 @@ const DrainageMap = props => {
 
   const strt2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/strt_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Strt"
@@ -166,7 +167,7 @@ const DrainageMap = props => {
 
   const strt3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/strt_3.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/strt_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Strt"
@@ -176,7 +177,7 @@ const DrainageMap = props => {
 
   const tkness1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/tkness_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Tkness"
@@ -186,7 +187,7 @@ const DrainageMap = props => {
 
   const tkness2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/tkness_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Tkness"
@@ -196,7 +197,7 @@ const DrainageMap = props => {
 
   const tkness3_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_3.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/tkness_3.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Tkness"
@@ -206,7 +207,7 @@ const DrainageMap = props => {
 
   const totalTkness_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/tkness_sum.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/tkness_sum.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "TknessSum"
@@ -216,7 +217,7 @@ const DrainageMap = props => {
 
   const vcont1_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/vcont_1.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/vcont_1.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Vcont"
@@ -226,7 +227,7 @@ const DrainageMap = props => {
 
   const vcont2_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-mfview/mapfiles/vcont_2.map",
+      base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/vcont_2.map",
     params: {
       ws: defaultWatershed,
       LAYERS: "Vcont"
@@ -326,8 +327,7 @@ const DrainageMap = props => {
   const handleWatersheds = ws => {
     setWatershed(ws);
 
-    oba
-      .post("geom/", {
+    odb.post("geom/", {
         table_name: "gcc",
         headers: {
           "Content-type": "application/json"
