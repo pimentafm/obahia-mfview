@@ -104,7 +104,7 @@ const Report = props => {
         <Document>
           <Page size="A4" style={styles.body}>
             <View style={styles.header} fixed>
-              <Image style={styles.imageHeader} src="/obahia-webmap/src/assets/images/logo.png"/>
+              <Image style={styles.imageHeader} src="http://corrente.dea.ufv.br/static/geonode/img/logo.png"/>
             </View>
             <Text style={styles.title}>{"Validação do modelo de fluxo para a bacia do Rio " + params.defaultWatershed[0].toUpperCase() + params.defaultWatershed.slice(1)}</Text>
             <Text style={styles.text} >{cat_text}</Text>
