@@ -9,10 +9,8 @@
 help()
 {
    echo ""
-   echo "Usage: $0 -f folder_name -s static_folder -t template_folder"
+   echo "Usage: $0 -f folder_name"
    echo -e "\t-f Folder name"
-   echo -e "\t-s Static folder directory"
-   echo -e "\t-t Template folder directory"
    exit 1 # Exit script after printing help
 }
 
@@ -20,14 +18,12 @@ while getopts "f:s:t:" opt
 do
    case "$opt" in
       f ) folder_name="$OPTARG" ;;
-      s ) static_folder="$OPTARG" ;;
-      t ) template_folder="$OPTARG" ;;
       ?  ) help ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
 
-if [ -z "$folder_name" ] || [ -z "$static_folder" ] || [ -z "$template_folder" ]
+if [ -z "$folder_name" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
@@ -43,10 +39,9 @@ find $folder_name"/index.html" -type f | xargs sed -i 's/\/favicon.ico/{{ STATIC
 find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/js/{{ STATIC_URL }}mfview\/static\/js/g'
 find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/css/{{ STATIC_URL }}mfview\/static\/css/g'
 
-#Change logo url
-find mfview/static/js/ -type f | xargs sed -i 's/static\/media/static\/geonode\/img/g'
-
-#Change logo url
-find mfview/static/js/ -type f | xargs sed -i 's/static\/media/static\/geonode\/img/g'
+find mfview/static/js/ -type f | xargs sed -i 's/static\/media/static\/mfview\/static\/media/g'
+find mfview/static/css/ -type f | xargs sed -i 's/static\/media/static\/mfview\/static\/media/g'
 
 find mfview/static/js/ -type f | xargs sed -i 's/logo.753248ba.png/logo.png/g'
+
+cp src/assets/images/*.png mfview/static/media/
