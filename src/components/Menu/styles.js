@@ -18,7 +18,7 @@ export const MenuContainer = styled.div`
 
         #layer-div {
             margin-top: 10px;
-            max-height: 800px;
+            max-height: 60vh;
             overflow-y: auto;
         }
     }

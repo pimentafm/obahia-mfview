@@ -59,8 +59,8 @@ const Barplot = props => {
             }
           },
           autosize: false,
-          width: 500,
-          height: 400,
+          width: 400,
+          height: 300,
           xaxis: {
             titlefont: {
               family: "Arial, sans-serif",

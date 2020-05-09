@@ -179,7 +179,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="tkness_1"
-          label="Expessura da 1ª camada"
+          label="Espessura da 1ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -187,7 +187,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="tkness_2"
-          label="Expessura da 2ª camada"
+          label="Espessura da 2ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -195,7 +195,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="tkness_3"
-          label="Expessura da 3ª camada"
+          label="Espessura da 3ª camada"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}
@@ -203,7 +203,7 @@ const Menu = props => {
 
         <LayerSwitcher
           name="tkness_sum"
-          label="Expessura total"
+          label="Espessura total"
           checked={false}
           legend={false}
           switcher={() => props.onOffLayers}

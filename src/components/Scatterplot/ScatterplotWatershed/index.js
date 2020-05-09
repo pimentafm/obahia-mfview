@@ -131,8 +131,8 @@ const Scatterplot = props => {
             }
           },
           autosize: false,
-          width: 500,
-          height: 500,
+          width: 400,
+          height: 300,
           xaxis: {
             title: {
               text: "Carga observada (m)"
