@@ -41,8 +41,8 @@ const DrainageMap = props => {
   const [top] = useState(new TileLayer({name: "top", visible: true}));
   const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
 
-  const [scatterImage, setScatterImage] = useState("http://corrente.dea.ufv.br/static/geonode/img/loading.png");
-  const [barImage, setBarImage] = useState("http://corrente.dea.ufv.br/static/geonode/img/loading.png");
+  const [scatterImage, setScatterImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
+  const [barImage, setBarImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
 
   const base_URL = "http://obahia.dea.ufv.br:8085/"
 
