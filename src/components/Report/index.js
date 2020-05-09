@@ -101,7 +101,7 @@ const Report = props => {
   return(
     <ReportContainer className="class-report">
       <PDFViewer className="pdf-viewer">
-        <Document>
+        <Document title={`bacia-rio-${params.defaultWatershed}`}>
           <Page size="A4" style={styles.body}>
             <View style={styles.header} fixed>
               <Image style={styles.imageHeader} src="http://obahia.dea.ufv.br/static/geonode/img/logo.png"/>
