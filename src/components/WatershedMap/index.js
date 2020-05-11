@@ -16,7 +16,6 @@ import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
 import CardPlot from "~/components/CardPlot";
-import Scatterplot from "~/components/Scatterplot/ScatterplotWatershed";
 import Barplot from "~/components/Barplot/BarplotWatershed";
 
 import CardReport from "~/components/CardReport";
@@ -403,12 +402,6 @@ const DrainageMap = props => {
       <Scalebar key="scalebar" map={map} />
 
       <CardPlot plotsAreHidden={plotsAreHidden}
-        scatterplot={
-          <Scatterplot 
-            key="scatterplot" 
-            defaultWatershed={defaultWatershed}
-          /> 
-        }
         barplot={
           <Barplot
             key={"barplot"}
