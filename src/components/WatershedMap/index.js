@@ -29,8 +29,8 @@ const DrainageMap = props => {
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
   const [reportIsHidden, setReportHidden] = useState(true);
-  const [center, setCenter] = useState([]);
-  const [zoom, setZoom] = useState([]);
+  const [center, setCenter] = useState(props.center);
+  const [zoom, setZoom] = useState(props.zoom);
   const [botm] = useState([new TileLayer({name: "botm_1", visible: false}), new TileLayer({name: "botm_2", visible: false}), new TileLayer({name: "botm_3", visible: false})]);
   const [hy] = useState([new TileLayer({name: "hy_1", visible: false}), new TileLayer({name: "hy_2", visible: false}), new TileLayer({name: "hy_3", visible: false})]);
   const [sf1] = useState([new TileLayer({name: "sf1_1", visible: false}), new TileLayer({name: "sf1_2", visible: false}), new TileLayer({name: "sf1_3", visible: false})]);
@@ -39,6 +39,11 @@ const DrainageMap = props => {
   const [total_tkness] = useState(new TileLayer({name: "tkness_sum", visible: false}));
   const [top] = useState(new TileLayer({name: "top", visible: true}));
   const [vcont] = useState([new TileLayer({name: "vcont_1", visible: false}), new TileLayer({name: "vcont_2", visible: false})]);
+  const [view] = useState(new View({
+    projection: "EPSG:4326",
+    center: center,
+    zoom: zoom
+  }));
 
   const [scatterImage, setScatterImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
   const [barImage, setBarImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
@@ -299,12 +304,6 @@ const DrainageMap = props => {
   vcont[1].getSource().updateParams({ time: Date.now() });
   vcont[1].changed();
 
-  const view = new View({
-    projection: "EPSG:4326",
-    center: center,
-    zoom: zoom
-  });
-
   const osm = new TileLayer({ source: new OSM() });
 
   const map = new OlMap({
@@ -318,10 +317,9 @@ const DrainageMap = props => {
   });
 
   useEffect(() => {
-    map.getView().setCenter(props.center);
-    map.getView().setZoom(props.zoom);
     map.setTarget("map");
-  }, [props.center, props.zoom, map]);
+    map.getView().setZoom(zoom);
+  }, [zoom, map]);
 
   const handleWatersheds = ws => {
     setWatershed(ws);
@@ -333,15 +331,16 @@ const DrainageMap = props => {
         }
       })
       .then(response => {
-        const cxcy = response.data
-          .filter(f => f.name === defaultWatershed.toUpperCase())
+        let cxcy = response.data
+          .filter(f => f.name === ws.toUpperCase())
           .map(c => c.centroid);
-        const extent = response.data
-          .filter(f => f.name === defaultWatershed.toUpperCase())
-          .map(c => c.extent);
 
-        setCenter(cxcy[0]);
-        setZoom(extent[0]);
+          cxcy = JSON.parse(cxcy);
+
+          setCenter(cxcy);
+          setZoom(8);
+  
+          map.getView().animate({center: cxcy, duration: 1000});
       })
       .catch(e => {
         this.errors.push(e);
