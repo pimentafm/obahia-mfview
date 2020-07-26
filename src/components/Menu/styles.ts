@@ -97,7 +97,7 @@ export const Content = styled.div`
 
     span {
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 500;
       color: #1f5582;
     }
   }

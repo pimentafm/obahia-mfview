@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import HtmlParser from 'react-html-parser';
 
-import { Modal, Tooltip, Button } from 'antd';
+import { Modal, Popover, Button } from 'antd';
 
 import OlMap from 'ol/Map';
 
@@ -97,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
         </a>
 
-        <Tooltip placement="right" title="Esconde/Mostra menu">
+        <Popover placement="right" content="Esconde/Mostra menu">
           <FiMenu
             id="handleMenu"
             type="menu"
@@ -105,7 +105,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             style={{ fontSize: '20px', color: '#000' }}
             onClick={handleMenu}
           />
-        </Tooltip>
+        </Popover>
       </Header>
 
       <Content>
@@ -119,9 +119,9 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             customizada do modelo de águas subterrâneas paras as bacias do Alto
             Rio Grande, Rio Corrente e Rio Carinhanha. Maiores informações sobre
             o modelo de fluxo desenvolvido com a utilização do modelo{' '}
-            <Tooltip
+            <Popover
               placement="right"
-              title="MODFLOW 2005: USGS Three-Dimensional Finite-Difference Ground-Water Model"
+              content="MODFLOW 2005: USGS Three-Dimensional Finite-Difference Ground-Water Model"
             >
               <a
                 target="_blank"
@@ -131,7 +131,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
                 {' '}
                 MODFLOW{' '}
               </a>
-            </Tooltip>
+            </Popover>
             pode ser encontradas em{' '}
             <FaInfoCircle
               className="text-icon"
@@ -204,20 +204,20 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
       </Content>
 
       <Footer ishidden={hidden}>
-        <Tooltip placement="right" title="Termos de uso">
+        <Popover placement="right" content="Termos de uso">
           <GoAlert
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showTermsOfUseModal}
           />
-        </Tooltip>
-        <Tooltip placement="right" title="Informações adicionais">
+        </Popover>
+        <Popover placement="right" content="Informações adicionais">
           <FaInfoCircle
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showMetadataModal}
           />
-        </Tooltip>
+        </Popover>
       </Footer>
 
       <Modal
