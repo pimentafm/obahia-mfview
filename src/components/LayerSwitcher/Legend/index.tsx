@@ -15,7 +15,7 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
 
   useEffect(() => {
     wms
-      .get(`mf_altogrande.map&mode=legend&layer=${name}`, {
+      .get(`altogrande_${name}.map&mode=legend&layer=${name}`, {
         responseType: 'text',
       })
       .then(res => {

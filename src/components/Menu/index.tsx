@@ -150,15 +150,38 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         </div>
 
         <LayerSwitcher
-          name="elevacao"
+          name="elevation"
           label="Elevação"
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
-          legendIsVisible={false}
+          legendIsVisible={true}
           layerInfoIsVisible={false}
           switchColor="#1f5582"
           downloadURL={downloadURL}
         />
+
+        <LayerSwitcher
+          name="thickness"
+          label="Espessura"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={false}
+          legendIsVisible={true}
+          layerInfoIsVisible={false}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+
+        <LayerSwitcher
+          name="head"
+          label="Carga"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={false}
+          legendIsVisible={true}
+          layerInfoIsVisible={false}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+        
 
         <div className="static-layers">
           <StaticLayerSwitcher

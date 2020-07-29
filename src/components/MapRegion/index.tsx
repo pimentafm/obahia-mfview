@@ -32,6 +32,8 @@ interface MapProps {
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [elevation] = useState(new TileLayer({ visible: true }));
+  const [thickness] = useState(new TileLayer({ visible: false }));
+  const [head] = useState(new TileLayer({ visible: false }));
 
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -51,6 +53,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [view] = useState(
     new View({
       projection: utmProjection,
+      maxZoom: 12,
       center: center,
       //extent: [276126.77, 8416856.44, 676126.77, 8816856.44],
       zoom: zoom,
@@ -63,7 +66,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, elevation, watersheds, counties, highways, hidrography],
+      layers: [osm, head, thickness, elevation, watersheds, counties, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -108,12 +111,30 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const elevation_source = new TileWMS({
-    url: wms.defaults.baseURL + 'mf_altogrande.map',
+    url: wms.defaults.baseURL + 'altogrande_elevation.map',
     params: {
-      LAYERS: 'elevacao',
+      LAYERS: 'elevation',
+      TILED: true,
+      QUERY_LAYERS: 'elevation'
+    },
+    serverType: 'mapserver',
+  });
+
+  const thickness_source = new TileWMS({
+    url: wms.defaults.baseURL + 'altogrande_thickness.map',
+    params: {
+      LAYERS: 'thickness',
       TILED: true,
     },
-    projection: 'EPSG:31983',
+    serverType: 'mapserver',
+  });
+
+  const head_source = new TileWMS({
+    url: wms.defaults.baseURL + 'altogrande_head.map',
+    params: {
+      LAYERS: 'head',
+      TILED: true,
+    },
     serverType: 'mapserver',
   });
 
@@ -133,9 +154,17 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
 
-  elevation.set('name', 'elevacao');
+  elevation.set('name', 'elevation');
   elevation.setSource(elevation_source);
   elevation.getSource().refresh();
+
+  thickness.set('name', 'thickness');
+  thickness.setSource(thickness_source);
+  thickness.getSource().refresh();
+
+  head.set('name', 'head');
+  head.setSource(head_source);
+  head.getSource().refresh();
 
   useEffect(() => {
     map.setTarget('map');
@@ -145,7 +174,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     <Container id="map">
       <Menu ishidden={false ? 1 : 0} map={map} />
 
-      <Popup map={map} source={elevation_source} />
+      <Popup map={map} source={[elevation_source, thickness_source, head_source]} />
 
       <Footer id="footer" map={map} />
     </Container>

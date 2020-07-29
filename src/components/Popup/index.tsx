@@ -14,12 +14,14 @@ import HtmlParser from 'react-html-parser';
 
 interface PopupProps {
   map: OlMap;
-  source: TileWMS;
+  source: Array<TileWMS>;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [popcoords, setPopCoords] = useState<string>();
-  const [popvalue, setPopValue] = useState<string>();
+  const [elevation, setElevation] = useState<string>();
+  const [thickness, setThickness] = useState<string>();
+  const [head, setHead] = useState<string>();
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -29,14 +31,19 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     element.style.display = 'none';
   }, []);
 
-  const getData = useCallback((url, coordinate) => {
+  const getData = useCallback((url, type) => {
     fetch(url)
       .then(response => {
         return response.text();
       })
       .then(value => {
-        setPopCoords(coordinate);
-        setPopValue(value);
+        if (type === 'elevation'){
+          setElevation(value);
+        } else if (type === 'thickness') {
+          setThickness(value);
+        } else {
+          setHead(value);
+        }
       });
   }, []);
 
@@ -47,12 +54,19 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       const stringifyFunc = createStringXY(5);
 
-      let url = source.getFeatureInfoUrl(evt.coordinate, res, proj, {
-        INFO_FORMAT: 'text/html',
+      let urls = source.map(source => source.getFeatureInfoUrl(evt.coordinate, res, proj, {
+        'INFO_FORMAT': 'text/html',
         VERSION: '1.3.0',
-      });
+        
+      }));
 
-      getData(url, stringifyFunc(evt.coordinate));
+      console.log(urls)
+
+      getData(urls[0], 'elevation');
+      getData(urls[1], 'thickness');
+      getData(urls[2], 'head');
+
+      setPopCoords(stringifyFunc(evt.coordinate));
 
       const element: HTMLElement = document.getElementById(
         'popup-class',
@@ -105,11 +119,25 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>MAE</td>
+          <td style={{ padding: `2px 5px` }}>Elevação</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? HtmlParser(popvalue) : 'Fora da camada'}
+            {elevation ? HtmlParser(elevation) : 'Fora da camada'}
           </td>
         </tr>
+        <tr style={{ background: '#fff' }}>
+          <td style={{ padding: `2px 5px` }}>Espessura</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {thickness ? HtmlParser(thickness) : 'Fora da camada'}
+          </td>
+        </tr>
+        <tr style={{ background: '#fff' }}>
+          <td style={{ padding: `2px 5px` }}>Carga</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {head ? HtmlParser(head) : 'Fora da camada'}
+          </td>
+        </tr>
+
+
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px`, borderRadius: `0px 0px 0px 2px` }}>
             LON, LAT
