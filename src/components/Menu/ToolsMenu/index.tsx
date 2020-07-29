@@ -31,9 +31,6 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         <GiStack
           className="text-icon"
           style={{ fontSize: 25, color: '#888888', cursor: 'pointer' }}
-          onClick={() =>
-            window.open('http://corrente.dea.ufv.br/landuse', '_self')
-          }
         />
       </Popover>
 

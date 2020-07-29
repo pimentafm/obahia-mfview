@@ -38,6 +38,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
+  const [urucuia] = useState(new TileLayer({ visible: true }));
   const [counties] = useState(new TileLayer({ visible: false }));
 
   const [center] = useState([476126.77, 8616856.44]);
@@ -66,13 +67,22 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, head, thickness, elevation, watersheds, counties, highways, hidrography],
+      layers: [osm, urucuia, head, thickness, elevation, watersheds, counties, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
       }),
     }),
   );
+
+  const urucuia_source = new TileWMS({
+    url: wms.defaults.baseURL + 'urucuia.map',
+    params: {
+      LAYERS: 'urucuia',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
 
   const watersheds_source = new TileWMS({
     url: wms.defaults.baseURL + 'watersheds.map',
@@ -115,7 +125,6 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     params: {
       LAYERS: 'elevation',
       TILED: true,
-      QUERY_LAYERS: 'elevation'
     },
     serverType: 'mapserver',
   });
@@ -137,6 +146,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     },
     serverType: 'mapserver',
   });
+
+  urucuia.set('name', 'urucuia');
+  urucuia.setSource(urucuia_source);
+  urucuia.getSource().refresh();
 
   watersheds.set('name', 'watersheds');
   watersheds.setSource(watersheds_source);

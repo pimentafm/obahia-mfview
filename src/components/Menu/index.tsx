@@ -79,6 +79,17 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
     [map],
   );
 
+  const handleLayerOpacity = useCallback(
+    (opacity, lyr_name) => {
+      map.getLayers().forEach(lyr => {
+        if (lyr.get('name') === lyr_name) {
+          lyr.setOpacity(opacity);
+        }
+      });
+    },
+    [map],
+  );
+
   useEffect(() => {
     setDownloadURL(`ftp://obahia.dea.ufv.br/landuse/`);
   }, []);
@@ -152,10 +163,11 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <LayerSwitcher
           name="elevation"
           label="Elevação"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
           legendIsVisible={true}
-          layerInfoIsVisible={false}
+          layerInfoIsVisible={true}
           switchColor="#1f5582"
           downloadURL={downloadURL}
         />
@@ -163,10 +175,11 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <LayerSwitcher
           name="thickness"
           label="Espessura"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
           legendIsVisible={true}
-          layerInfoIsVisible={false}
+          layerInfoIsVisible={true}
           switchColor="#1f5582"
           downloadURL={downloadURL}
         />
@@ -174,10 +187,11 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <LayerSwitcher
           name="head"
           label="Carga"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
           legendIsVisible={true}
-          layerInfoIsVisible={false}
+          layerInfoIsVisible={true}
           switchColor="#1f5582"
           downloadURL={downloadURL}
         />
@@ -204,6 +218,16 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
 
           <StaticLayerSwitcher
+            name="counties"
+            label="Municípios"
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={false}
+            layerInfoIsVisible={false}
+            switchColor="#696969"
+          />
+
+          <StaticLayerSwitcher
             name="watersheds"
             label="Bacias hidrográficas"
             handleLayerVisibility={handleLayerVisibility}
@@ -214,14 +238,16 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
 
           <StaticLayerSwitcher
-            name="counties"
-            label="Municípios"
+            name="urucuia"
+            label="Aquifero Urucuia"
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={true}
             legendIsVisible={false}
             layerInfoIsVisible={false}
-            switchColor="#696969"
-          />
+            switchColor="#d1ddee"
+          /> 
+
+
         </div>
         <div className="final-space"></div>
       </Content>
