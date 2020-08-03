@@ -12,6 +12,7 @@ import Legend from './Legend';
 import { Container } from './styles';
 
 interface LayerSwitcherProps {
+  mapfile: string;
   name: string;
   label: string;
   downloadURL?: string;
@@ -24,6 +25,7 @@ interface LayerSwitcherProps {
 }
 
 const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
+  mapfile,
   name,
   label,
   downloadURL,
@@ -54,7 +56,9 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   let legend = undefined;
 
   if (legendIsVisible) {
-    legend = <Legend name={name} isvisible={visible}></Legend>;
+    legend = (
+      <Legend mapfile={mapfile} name={name} isvisible={visible}></Legend>
+    );
   }
 
   let layerInfo = undefined;
@@ -99,7 +103,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
         <label>{label}</label>
 
         <div className="slider-switcher">
-        <Slider
+          <Slider
             defaultValue={1}
             min={0}
             max={1}
@@ -109,17 +113,17 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
             onChange={handleOpacity}
           />
 
-        <Switch
-          id={name}
-          checked={visible}
-          handleDiameter={16}
-          onChange={handleVisibility}
-          onColor={switchColor}
-          checkedIcon={false}
-          uncheckedIcon={false}
-          height={22}
-          width={44}
-        />
+          <Switch
+            id={name}
+            checked={visible}
+            handleDiameter={16}
+            onChange={handleVisibility}
+            onColor={switchColor}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            height={22}
+            width={44}
+          />
         </div>
       </div>
 

@@ -6,16 +6,17 @@ import { wms } from '../../../services';
 import { Container } from './styles';
 
 interface LegendProps {
+  mapfile: string;
   name: string;
   isvisible: boolean;
 }
 
-const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
+const Legend: React.FC<LegendProps> = ({ mapfile, name, isvisible }) => {
   const [legendHTML, setlegendHTML] = useState([]);
 
   useEffect(() => {
     wms
-      .get(`altogrande_${name}.map&mode=legend&layer=${name}`, {
+      .get(`${mapfile}.map&mode=legend&layer=${name}`, {
         responseType: 'text',
       })
       .then(res => {
@@ -25,7 +26,7 @@ const Legend: React.FC<LegendProps> = ({ name, isvisible }) => {
 
         setlegendHTML(html);
       });
-  }, [name]);
+  }, [mapfile, name]);
   return (
     <Container id="layerswitcher" isvisible={isvisible}>
       {legendHTML}

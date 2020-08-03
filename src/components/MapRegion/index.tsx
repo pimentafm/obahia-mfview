@@ -31,14 +31,24 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [elevation] = useState(
+  const [elevation_altogrande] = useState(
     new TileLayer({ visible: true, className: 'altogrande-layer' }),
   );
-  const [thickness] = useState(
+  const [thickness_altogrande] = useState(
     new TileLayer({ visible: false, className: 'altogrande-layer' }),
   );
-  const [head] = useState(
+  const [head_altogrande] = useState(
     new TileLayer({ visible: false, className: 'altogrande-layer' }),
+  );
+
+  const [elevation_corrente] = useState(
+    new TileLayer({ visible: false, className: 'corrente-layer' }),
+  );
+  const [thickness_corrente] = useState(
+    new TileLayer({ visible: false, className: 'corrente-layer' }),
+  );
+  const [head_corrente] = useState(
+    new TileLayer({ visible: false, className: 'corrente-layer' }),
   );
 
   const [highways] = useState(new TileLayer({ visible: false }));
@@ -76,9 +86,12 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       layers: [
         osm,
         urucuia,
-        head,
-        thickness,
-        elevation,
+        head_altogrande,
+        thickness_altogrande,
+        elevation_altogrande,
+        head_corrente,
+        thickness_corrente,
+        elevation_corrente,
         watersheds,
         counties,
         highways,
@@ -141,7 +154,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     crossOrigin: 'anonymous',
   });
 
-  const elevation_source = new TileWMS({
+  const elevation_altogrande_source = new TileWMS({
     url: wms.defaults.baseURL + 'altogrande_elevation.map',
     params: {
       LAYERS: 'elevation',
@@ -151,7 +164,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     crossOrigin: 'anonymous',
   });
 
-  const thickness_source = new TileWMS({
+  const thickness_altogrande_source = new TileWMS({
     url: wms.defaults.baseURL + 'altogrande_thickness.map',
     params: {
       LAYERS: 'thickness',
@@ -161,8 +174,38 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     crossOrigin: 'anonymous',
   });
 
-  const head_source = new TileWMS({
+  const head_altogrande_source = new TileWMS({
     url: wms.defaults.baseURL + 'altogrande_head.map',
+    params: {
+      LAYERS: 'head',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
+  const elevation_corrente_source = new TileWMS({
+    url: wms.defaults.baseURL + 'corrente_elevation.map',
+    params: {
+      LAYERS: 'elevation',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
+  const thickness_corrente_source = new TileWMS({
+    url: wms.defaults.baseURL + 'corrente_thickness.map',
+    params: {
+      LAYERS: 'thickness',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
+  const head_corrente_source = new TileWMS({
+    url: wms.defaults.baseURL + 'corrente_head.map',
     params: {
       LAYERS: 'head',
       TILED: true,
@@ -191,17 +234,17 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
 
-  elevation.set('name', 'elevation');
-  elevation.setSource(elevation_source);
-  elevation.getSource().refresh();
+  elevation_altogrande.set('name', 'elevation_altogrande');
+  elevation_altogrande.setSource(elevation_altogrande_source);
+  elevation_altogrande.getSource().refresh();
 
-  thickness.set('name', 'thickness');
-  thickness.setSource(thickness_source);
-  thickness.getSource().refresh();
+  thickness_altogrande.set('name', 'thickness_altogrande');
+  thickness_altogrande.setSource(thickness_altogrande_source);
+  thickness_altogrande.getSource().refresh();
 
-  head.set('name', 'head');
-  head.setSource(head_source);
-  head.getSource().refresh();
+  head_altogrande.set('name', 'head_altogrande');
+  head_altogrande.setSource(head_altogrande_source);
+  head_altogrande.getSource().refresh();
 
   useEffect(() => {
     map.setTarget('map');
@@ -213,7 +256,14 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
 
       <Popup
         map={map}
-        source={[elevation_source, thickness_source, head_source]}
+        source={[
+          elevation_altogrande_source,
+          thickness_altogrande_source,
+          head_altogrande_source,
+          elevation_corrente_source,
+          thickness_corrente_source,
+          head_corrente_source,
+        ]}
       />
 
       <Footer id="footer" map={map} />

@@ -161,6 +161,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         </div>
 
         <LayerSwitcher
+          mapfile="altogrande_elevation"
           name="elevation"
           label="Elevação"
           handleLayerOpacity={handleLayerOpacity}
@@ -173,6 +174,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         />
 
         <LayerSwitcher
+          mapfile="altogrande_thickness"
           name="thickness"
           label="Espessura"
           handleLayerOpacity={handleLayerOpacity}
@@ -185,6 +187,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         />
 
         <LayerSwitcher
+          mapfile="altogrande_head"
           name="head"
           label="Carga"
           handleLayerOpacity={handleLayerOpacity}
@@ -195,7 +198,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           switchColor="#1f5582"
           downloadURL={downloadURL}
         />
-        
 
         <div className="static-layers">
           <StaticLayerSwitcher
@@ -245,9 +247,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={false}
             layerInfoIsVisible={false}
             switchColor="#d1ddee"
-          /> 
-
-
+          />
         </div>
         <div className="final-space"></div>
       </Content>
@@ -290,7 +290,15 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         ]}
       >
         <p style={{ textAlign: 'justify' }}>
-        O usuário assume todo o risco relacionado ao uso de informações nas páginas Web desta plataforma. A UFV fornece essas informações da maneira como estão apresentadas, e a UFV se isenta de todas e quaisquer garantias, expressas ou implícitas, incluindo (mas não se limitando a) quaisquer garantias implícitas de adequação a uma finalidade específica. Em nenhum caso a UFV será responsável perante usuários ou terceiros por quaisquer danos diretos, indiretos, incidentais, conseqüenciais, especiais ou perda de lucro resultante de qualquer uso ou uso indevido desses dados.
+          O usuário assume todo o risco relacionado ao uso de informações nas
+          páginas Web desta plataforma. A UFV fornece essas informações da
+          maneira como estão apresentadas, e a UFV se isenta de todas e
+          quaisquer garantias, expressas ou implícitas, incluindo (mas não se
+          limitando a) quaisquer garantias implícitas de adequação a uma
+          finalidade específica. Em nenhum caso a UFV será responsável perante
+          usuários ou terceiros por quaisquer danos diretos, indiretos,
+          incidentais, conseqüenciais, especiais ou perda de lucro resultante de
+          qualquer uso ou uso indevido desses dados.
         </p>
       </Modal>
 
