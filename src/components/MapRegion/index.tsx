@@ -31,15 +31,23 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [elevation] = useState(new TileLayer({ visible: true }));
-  const [thickness] = useState(new TileLayer({ visible: false }));
-  const [head] = useState(new TileLayer({ visible: false }));
+  const [elevation] = useState(
+    new TileLayer({ visible: true, className: 'altogrande-layer' }),
+  );
+  const [thickness] = useState(
+    new TileLayer({ visible: false, className: 'altogrande-layer' }),
+  );
+  const [head] = useState(
+    new TileLayer({ visible: false, className: 'altogrande-layer' }),
+  );
 
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
   const [urucuia] = useState(new TileLayer({ visible: true }));
   const [counties] = useState(new TileLayer({ visible: false }));
+
+  const osm = new TileLayer({ source: new OSM({ crossOrigin: 'anonymous' }) });
 
   const [center] = useState([476126.77, 8616856.44]);
   const [zoom] = useState<number>(7);
@@ -61,13 +69,21 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     }),
   );
 
-  const osm = new TileLayer({ source: new OSM() });
-
   const [map] = useState(
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, urucuia, head, thickness, elevation, watersheds, counties, highways, hidrography],
+      layers: [
+        osm,
+        urucuia,
+        head,
+        thickness,
+        elevation,
+        watersheds,
+        counties,
+        highways,
+        hidrography,
+      ],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -82,6 +98,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const watersheds_source = new TileWMS({
@@ -91,6 +108,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const counties_source = new TileWMS({
@@ -100,6 +118,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const highways_source = new TileWMS({
@@ -109,6 +128,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const hidrography_source = new TileWMS({
@@ -118,6 +138,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const elevation_source = new TileWMS({
@@ -127,6 +148,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const thickness_source = new TileWMS({
@@ -136,6 +158,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const head_source = new TileWMS({
@@ -145,6 +168,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   urucuia.set('name', 'urucuia');
@@ -187,7 +211,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     <Container id="map">
       <Menu ishidden={window.innerWidth <= 760 ? 1 : 0} map={map} />
 
-      <Popup map={map} source={[elevation_source, thickness_source, head_source]} />
+      <Popup
+        map={map}
+        source={[elevation_source, thickness_source, head_source]}
+      />
 
       <Footer id="footer" map={map} />
     </Container>

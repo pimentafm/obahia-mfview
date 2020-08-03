@@ -37,7 +37,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         return response.text();
       })
       .then(value => {
-        if (type === 'elevation'){
+        if (type === 'elevation') {
           setElevation(value);
         } else if (type === 'thickness') {
           setThickness(value);
@@ -54,13 +54,22 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       const stringifyFunc = createStringXY(5);
 
-      let urls = source.map(source => source.getFeatureInfoUrl(evt.coordinate, res, proj, {
-        'INFO_FORMAT': 'text/html',
-        VERSION: '1.3.0',
-        
-      }));
+      let urls = source.map(source =>
+        source.getFeatureInfoUrl(evt.coordinate, res, proj, {
+          INFO_FORMAT: 'text/html',
+          VERSION: '1.3.0',
+        }),
+      );
 
-      console.log(urls)
+      map.forEachLayerAtPixel(
+        evt.pixel,
+        (layer, rgba) => {
+          console.log(layer);
+          console.log(rgba);
+          return true;
+        },
+        { layerFilter: layer => layer.getClassName() !== 'ol-layer' },
+      );
 
       getData(urls[0], 'elevation');
       getData(urls[1], 'thickness');
@@ -136,7 +145,6 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             {head ? HtmlParser(head) : 'Fora da camada'}
           </td>
         </tr>
-
 
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px`, borderRadius: `0px 0px 0px 2px` }}>
