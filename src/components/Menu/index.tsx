@@ -246,7 +246,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             layerIsVisible={true}
             legendIsVisible={false}
             layerInfoIsVisible={false}
-            switchColor="#d1ddee"
+            switchColor="#f5f5dc"
           />
         </div>
         <div className="final-space"></div>
