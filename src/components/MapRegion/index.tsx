@@ -246,6 +246,18 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   head_altogrande.setSource(head_altogrande_source);
   head_altogrande.getSource().refresh();
 
+  elevation_corrente.set('name', 'elevation_corrente');
+  elevation_corrente.setSource(elevation_corrente_source);
+  elevation_corrente.getSource().refresh();
+
+  thickness_corrente.set('name', 'thickness_corrente');
+  thickness_corrente.setSource(thickness_corrente_source);
+  thickness_corrente.getSource().refresh();
+
+  head_corrente.set('name', 'head_corrente');
+  head_corrente.setSource(head_corrente_source);
+  head_corrente.getSource().refresh();
+
   useEffect(() => {
     map.setTarget('map');
   });

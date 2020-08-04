@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import Collapsible from 'react-collapsible';
+
 import HtmlParser from 'react-html-parser';
 
 import { Modal, Popover, Button } from 'antd';
@@ -160,44 +162,46 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           </span>
         </div>
 
-        <LayerSwitcher
-          mapfile="altogrande_elevation"
-          name="elevation"
-          label="Elevação"
-          handleLayerOpacity={handleLayerOpacity}
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
-          switchColor="#1f5582"
-          downloadURL={downloadURL}
-        />
+        <Collapsible tabIndex={0} open={true} trigger="Alto Rio Grande">
+          <LayerSwitcher
+            mapfile="altogrande_elevation"
+            name="elevation"
+            label="Elevação"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={true}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
 
-        <LayerSwitcher
-          mapfile="altogrande_thickness"
-          name="thickness"
-          label="Espessura"
-          handleLayerOpacity={handleLayerOpacity}
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
-          switchColor="#1f5582"
-          downloadURL={downloadURL}
-        />
+          <LayerSwitcher
+            mapfile="altogrande_thickness"
+            name="thickness"
+            label="Espessura"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
 
-        <LayerSwitcher
-          mapfile="altogrande_head"
-          name="head"
-          label="Carga"
-          handleLayerOpacity={handleLayerOpacity}
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
-          switchColor="#1f5582"
-          downloadURL={downloadURL}
-        />
+          <LayerSwitcher
+            mapfile="altogrande_head"
+            name="head"
+            label="Carga"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
+        </Collapsible>
 
         <div className="static-layers">
           <StaticLayerSwitcher

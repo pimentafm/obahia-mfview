@@ -119,4 +119,20 @@ export const Content = styled.div`
   .final-space {
     padding-top: 30px;
   }
+
+  .Collapsible {
+    > span {
+      margin-left: 5px;
+    }
+    margin-top: 5px;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: #d9d9d9;
+  }
+
+  .Collapsible__trigger {
+    display: flex;
+    font-weight: 500;
+    cursor: pointer;
+  }
 `;

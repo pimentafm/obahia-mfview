@@ -4,11 +4,13 @@ import { lighten } from 'polished';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid;
-  border-radius: 2px;
-  border-color: #d9d9d9;
   padding: 5px;
   margin-top: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  /* border: 1px solid;
+  border-radius: 2px;
+  border-color: #d9d9d9; */
 
   .layer-div {
     display: flex;
