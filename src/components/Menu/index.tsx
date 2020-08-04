@@ -165,7 +165,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <Collapsible tabIndex={0} open={true} trigger="Alto Rio Grande">
           <LayerSwitcher
             mapfile="altogrande_elevation"
-            name="elevation"
+            name="elevation_altogrande"
             label="Elevação"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -178,7 +178,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="altogrande_thickness"
-            name="thickness"
+            name="thickness_altogrande"
             label="Espessura"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -191,7 +191,48 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="altogrande_head"
-            name="head"
+            name="head_altogrande"
+            label="Carga"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
+        </Collapsible>
+
+        <Collapsible tabIndex={1} open={false} trigger="Rio Corrente">
+          <LayerSwitcher
+            mapfile="corrente_elevation"
+            name="elevation_corrente"
+            label="Elevação"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
+
+          <LayerSwitcher
+            mapfile="corrente_thickness"
+            name="thickness_corrente"
+            label="Espessura"
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL}
+          />
+
+          <LayerSwitcher
+            mapfile="corrente_head"
+            name="head_corrente"
             label="Carga"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
