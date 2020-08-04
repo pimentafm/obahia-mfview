@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
+
 import OlMap from 'ol/Map';
 import TileWMS from 'ol/source/TileWMS';
+import axios from 'axios';
 
 import Overlay from 'ol/Overlay';
 import OverlayPositioning from 'ol/OverlayPositioning';
@@ -24,27 +26,15 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [head, setHead] = useState<string>();
 
   const closePopUp = useCallback(() => {
+    setElevation(undefined);
+    setThickness(undefined);
+    setHead(undefined);
+
     const element: HTMLElement = document.getElementById(
       'popup-class',
     ) as HTMLElement;
 
     element.style.display = 'none';
-  }, []);
-
-  const getData = useCallback((url, type) => {
-    fetch(url)
-      .then(response => {
-        return response.text();
-      })
-      .then(value => {
-        if (type === 'elevation') {
-          setElevation(value);
-        } else if (type === 'thickness') {
-          setThickness(value);
-        } else {
-          setHead(value);
-        }
-      });
   }, []);
 
   useEffect(() => {
@@ -65,31 +55,43 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     });
 
     map.on('singleclick', evt => {
+      setElevation(undefined);
+      setThickness(undefined);
+      setHead(undefined);
+
       let res = map.getView().getResolution();
       let proj = map.getView().getProjection();
 
       const stringifyFunc = createStringXY(5);
 
-      let urls = source.map(source =>
-        source.getFeatureInfoUrl(evt.coordinate, res, proj, {
-          INFO_FORMAT: 'text/html',
-          VERSION: '1.3.0',
-        }),
-      );
-
       map.forEachLayerAtPixel(
         evt.pixel,
         (layer, rgba) => {
-          console.log(layer);
-          console.log(rgba);
-          // return true;
+          let source = layer.getProperties().source;
+
+          let url = source.getFeatureInfoUrl(evt.coordinate, res, proj, {
+            INFO_FORMAT: 'text/html',
+            VERSION: '1.3.0',
+          });
+
+          let layerName = layer.getProperties().name;
+          let varName = layerName.split('_')[0];
+
+          //console.log(varName.charAt(0).toUpperCase() + varName.slice(1));
+
+          axios.get(url).then(response => {
+            let data = response.data;
+            if (varName === 'elevation') {
+              setElevation(data);
+            } else if (varName === 'thickness') {
+              setThickness(data);
+            } else {
+              setHead(data);
+            }
+          });
         },
         { layerFilter: layer => layer.getClassName() !== 'ol-layer' },
       );
-
-      getData(urls[0], 'elevation');
-      getData(urls[1], 'thickness');
-      getData(urls[2], 'head');
 
       setPopCoords(stringifyFunc(evt.coordinate));
 
@@ -111,7 +113,38 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       map.addOverlay(popup);
     });
-  }, [map, getData, source]);
+  }, [map, source]);
+
+  let tableInfoElevation = (
+    <tr
+      style={{
+        background: '#fff',
+      }}
+    >
+      <td style={{ padding: `2px 5px` }}>Elevação</td>
+      <td id="popup-value" style={{ padding: `2px 5px` }}>
+        {elevation ? HtmlParser(elevation) : 'Fora da camada'}
+      </td>
+    </tr>
+  );
+
+  let tableInfoThickness = (
+    <tr style={{ background: '#fff' }}>
+      <td style={{ padding: `2px 5px` }}>Espessura</td>
+      <td id="popup-value" style={{ padding: `2px 5px` }}>
+        {thickness ? HtmlParser(thickness) : 'Fora da camada'}
+      </td>
+    </tr>
+  );
+
+  let tableInfoHead = (
+    <tr style={{ background: '#fff' }}>
+      <td style={{ padding: `2px 5px` }}>Espessura</td>
+      <td id="popup-value" style={{ padding: `2px 5px` }}>
+        {head ? HtmlParser(head) : 'Fora da camada'}
+      </td>
+    </tr>
+  );
 
   return (
     <Container>
@@ -143,25 +176,9 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             />
           </th>
         </tr>
-        <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Elevação</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {elevation ? HtmlParser(elevation) : 'Fora da camada'}
-          </td>
-        </tr>
-        <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Espessura</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {thickness ? HtmlParser(thickness) : 'Fora da camada'}
-          </td>
-        </tr>
-        <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Carga</td>
-          <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {head ? HtmlParser(head) : 'Fora da camada'}
-          </td>
-        </tr>
-
+        {tableInfoElevation && elevation ? tableInfoElevation : <></>}
+        {tableInfoThickness && thickness ? tableInfoThickness : <></>}
+        {tableInfoHead && head ? tableInfoHead : <></>}
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px`, borderRadius: `0px 0px 0px 2px` }}>
             LON, LAT
