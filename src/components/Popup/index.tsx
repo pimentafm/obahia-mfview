@@ -139,7 +139,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
   let tableInfoHead = (
     <tr style={{ background: '#fff' }}>
-      <td style={{ padding: `2px 5px` }}>Espessura</td>
+      <td style={{ padding: `2px 5px` }}>Carga</td>
       <td id="popup-value" style={{ padding: `2px 5px` }}>
         {head ? HtmlParser(head) : 'Fora da camada'}
       </td>
