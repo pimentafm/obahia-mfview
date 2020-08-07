@@ -41,13 +41,13 @@ const Map: React.FC<MapProps> = () => {
     new TileLayer({ visible: false, className: 'altogrande-layer' }),
   );
 
-  const [elevation_corrente] = useState(
+  const [corrente_elevation] = useState(
     new TileLayer({ visible: false, className: 'corrente-layer' }),
   );
-  const [thickness_corrente] = useState(
+  const [corrente_thickness] = useState(
     new TileLayer({ visible: false, className: 'corrente-layer' }),
   );
-  const [head_corrente] = useState(
+  const [corrente_head] = useState(
     new TileLayer({ visible: false, className: 'corrente-layer' }),
   );
 
@@ -89,9 +89,9 @@ const Map: React.FC<MapProps> = () => {
         altogrande_head,
         altogrande_thickness,
         altogrande_elevation,
-        head_corrente,
-        thickness_corrente,
-        elevation_corrente,
+        corrente_head,
+        corrente_thickness,
+        corrente_elevation,
         watersheds,
         counties,
         highways,
@@ -184,7 +184,7 @@ const Map: React.FC<MapProps> = () => {
     crossOrigin: 'anonymous',
   });
 
-  const elevation_corrente_source = new TileWMS({
+  const corrente_elevation_source = new TileWMS({
     url: wms.defaults.baseURL + 'corrente_elevation.map',
     params: {
       LAYERS: 'elevation',
@@ -194,7 +194,7 @@ const Map: React.FC<MapProps> = () => {
     crossOrigin: 'anonymous',
   });
 
-  const thickness_corrente_source = new TileWMS({
+  const corrente_thickness_source = new TileWMS({
     url: wms.defaults.baseURL + 'corrente_thickness.map',
     params: {
       LAYERS: 'thickness',
@@ -204,7 +204,7 @@ const Map: React.FC<MapProps> = () => {
     crossOrigin: 'anonymous',
   });
 
-  const head_corrente_source = new TileWMS({
+  const corrente_head_source = new TileWMS({
     url: wms.defaults.baseURL + 'corrente_head.map',
     params: {
       LAYERS: 'head',
@@ -246,17 +246,17 @@ const Map: React.FC<MapProps> = () => {
   altogrande_head.setSource(altogrande_head_source);
   altogrande_head.getSource().refresh();
 
-  elevation_corrente.set('name', 'elevation_corrente');
-  elevation_corrente.setSource(elevation_corrente_source);
-  elevation_corrente.getSource().refresh();
+  corrente_elevation.set('name', 'corrente_elevation');
+  corrente_elevation.setSource(corrente_elevation_source);
+  corrente_elevation.getSource().refresh();
 
-  thickness_corrente.set('name', 'thickness_corrente');
-  thickness_corrente.setSource(thickness_corrente_source);
-  thickness_corrente.getSource().refresh();
+  corrente_thickness.set('name', 'corrente_thickness');
+  corrente_thickness.setSource(corrente_thickness_source);
+  corrente_thickness.getSource().refresh();
 
-  head_corrente.set('name', 'head_corrente');
-  head_corrente.setSource(head_corrente_source);
-  head_corrente.getSource().refresh();
+  corrente_head.set('name', 'corrente_head');
+  corrente_head.setSource(corrente_head_source);
+  corrente_head.getSource().refresh();
 
   useEffect(() => {
     map.setTarget('map');
@@ -272,9 +272,9 @@ const Map: React.FC<MapProps> = () => {
           altogrande_elevation_source,
           altogrande_thickness_source,
           altogrande_head_source,
-          elevation_corrente_source,
-          thickness_corrente_source,
-          head_corrente_source,
+          corrente_elevation_source,
+          corrente_thickness_source,
+          corrente_head_source,
         ]}
       />
 

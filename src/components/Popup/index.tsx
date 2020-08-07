@@ -75,9 +75,9 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           });
 
           let layerName = layer.getProperties().name;
-          let varName = layerName.split('_')[0];
+          let varName = layerName.split('_')[1];
 
-          //console.log(varName.charAt(0).toUpperCase() + varName.slice(1));
+          // console.log(varName.charAt(0).toUpperCase() + varName.slice(1));
 
           axios.get(url).then(response => {
             let data = response.data;

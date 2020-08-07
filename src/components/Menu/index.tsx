@@ -206,7 +206,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <Collapsible tabIndex={1} open={false} trigger="Rio Corrente">
           <LayerSwitcher
             mapfile="corrente_elevation"
-            name="elevation_corrente"
+            name="corrente_elevation"
             label="Elevação"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -219,7 +219,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="corrente_thickness"
-            name="thickness_corrente"
+            name="corrente_thickness"
             label="Espessura"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -232,7 +232,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="corrente_head"
-            name="head_corrente"
+            name="corrente_head"
             label="Carga"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
