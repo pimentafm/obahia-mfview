@@ -72,7 +72,7 @@ const Map: React.FC<MapProps> = () => {
   const [view] = useState(
     new View({
       projection: utmProjection,
-      maxZoom: 12,
+      maxZoom: 10,
       center: center,
       //extent: [276126.77, 8416856.44, 676126.77, 8816856.44],
       zoom: zoom,
