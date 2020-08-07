@@ -165,7 +165,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <Collapsible tabIndex={0} open={true} trigger="Alto Rio Grande">
           <LayerSwitcher
             mapfile="altogrande_elevation"
-            name="elevation_altogrande"
+            name="altogrande_elevation"
             label="Elevação"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -178,7 +178,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="altogrande_thickness"
-            name="thickness_altogrande"
+            name="altogrande_thickness"
             label="Espessura"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
@@ -191,7 +191,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <LayerSwitcher
             mapfile="altogrande_head"
-            name="head_altogrande"
+            name="altogrande_head"
             label="Carga"
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
