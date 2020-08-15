@@ -14,12 +14,16 @@ import { FiXCircle } from 'react-icons/fi';
 import { Container } from './styles';
 import HtmlParser from 'react-html-parser';
 
+import { useTranslation } from 'react-i18next';
+
 interface PopupProps {
   map: OlMap;
   source: Array<TileWMS>;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
+  const { t } = useTranslation();
+
   const [popcoords, setPopCoords] = useState<string>();
   const [elevation, setElevation] = useState<string>();
   const [thickness, setThickness] = useState<string>();
@@ -121,7 +125,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         background: '#fff',
       }}
     >
-      <td style={{ padding: `2px 5px` }}>Elevação</td>
+      <td style={{ padding: `2px 5px` }}>{t('label_elevation')}</td>
       <td id="popup-value" style={{ padding: `2px 5px` }}>
         {elevation ? HtmlParser(elevation) : 'Fora da camada'}
       </td>
@@ -130,7 +134,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
   let tableInfoThickness = (
     <tr style={{ background: '#fff' }}>
-      <td style={{ padding: `2px 5px` }}>Espessura</td>
+      <td style={{ padding: `2px 5px` }}>{t('label_thickness')}</td>
       <td id="popup-value" style={{ padding: `2px 5px` }}>
         {thickness ? HtmlParser(thickness) : 'Fora da camada'}
       </td>
@@ -139,7 +143,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
   let tableInfoHead = (
     <tr style={{ background: '#fff' }}>
-      <td style={{ padding: `2px 5px` }}>Carga</td>
+      <td style={{ padding: `2px 5px` }}>{t('label_head')}</td>
       <td id="popup-value" style={{ padding: `2px 5px` }}>
         {head ? HtmlParser(head) : 'Fora da camada'}
       </td>

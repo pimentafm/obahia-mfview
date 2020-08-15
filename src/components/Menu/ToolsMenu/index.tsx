@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  GiMeshBall,
-  GiStack,
-  GiRaining,
-  GiNetworkBars,
-  GiPieChart,
-} from 'react-icons/gi';
+import { GiMeshBall, GiStack, GiRaining, GiNetworkBars } from 'react-icons/gi';
 import { Popover } from 'antd';
 
 import { Container } from './styles';
@@ -64,14 +58,6 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         <GiMeshBall
           className="text-icon"
           style={{ fontSize: 25, color: '#1f5582', cursor: 'pointer' }}
-        />
-      </Popover>
-
-      <Popover placement="right" content="outro">
-        <GiPieChart
-          className="text-icon"
-          style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
-          onClick={() => window.open('http://corrente.dea.ufv.br', '_self')}
         />
       </Popover>
     </Container>

@@ -9,15 +9,12 @@ export const Container = styled.footer`
     height: 30px;
     background: #fff;
     z-index: 1;
-
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1),
       -1px -2px 2px rgba(0, 0, 0, 0.05);
-
     label {
       padding-left: 10px;
       padding-right: 5px;
     }
-
     #mouse-position-coordinates {
       width: 250px;
       height: 25px;

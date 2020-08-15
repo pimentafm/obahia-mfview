@@ -13,6 +13,8 @@ import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GoAlert } from 'react-icons/go';
 
+import ChangeLanguage from './ChangeLanguage';
+
 import ToolsMenu from './ToolsMenu';
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
@@ -22,24 +24,35 @@ import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
 
+import { useTranslation } from 'react-i18next';
+
 interface MenuProps {
   ishidden: number;
   map: OlMap;
 }
 
 const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
+  const { t } = useTranslation();
+  document.title = t('appname');
+
   const [hidden, setHidden] = useState(ishidden);
   const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
 
-  const [downloadURL, setDownloadURL] = useState('ftp://obahia.dea.ufv.br/modflow/');
+  const [downloadURL, setDownloadURL] = useState(
+    'ftp://obahia.dea.ufv.br/modflow/',
+  );
 
   const termsOfUse = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Visualizador do Modelo de Águas Subterrâneas - MODFLOW - Termos de uso</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
+      'modal_terms_title',
+    )}</span>`,
   );
 
   const additionalInformation = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Visualizador do Modelo de Águas Subterrâneas - MODFLOW - Informações adicionais</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
+      'modal_info_title',
+    )}</span>`,
   );
 
   const showTermsOfUseModal = () => {
@@ -98,6 +111,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
   return (
     <Container id="menu" ishidden={hidden}>
+      <ChangeLanguage ishidden={hidden} />
       <ToolsMenu ishidden={hidden} />
       <ZoomControl ishidden={hidden} map={map} />
       <Scalebar id="scalebar" map={map} />
@@ -110,7 +124,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
         </a>
 
-        <Popover placement="right" content="Esconde/Mostra menu">
+        <Popover placement="right" content={t('tooltip_menu')}>
           <FiMenu
             id="handleMenu"
             type="menu"
@@ -123,15 +137,12 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
       <Content>
         <div className="card-menu">
-          <span>Visualizador do Modelo de Águas Subterrâneas</span>
+          <span>{t('appname')}</span>
         </div>
 
         <div className="static-layers">
           <span className="span-text">
-            <label>Descrição:</label> Esta ferramenta permite a visualização
-            customizada do modelo de águas subterrâneas paras as bacias do Alto
-            Rio Grande, Rio Corrente e Rio Carinhanha. Maiores informações sobre
-            o modelo de fluxo desenvolvido com a utilização do modelo{' '}
+            <label>{t('description_title')}</label> {t('description_start')}{' '}
             <Popover
               placement="right"
               content="MODFLOW 2005: USGS Three-Dimensional Finite-Difference Ground-Water Model"
@@ -145,14 +156,13 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
                 MODFLOW{' '}
               </a>
             </Popover>
-            pode ser encontradas em{' '}
+            {t('description_end')}{' '}
             <FaInfoCircle
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
               onClick={showMetadataModal}
             />
-            . O uso dessas informações implica no aceite dos termos de uso
-            especificados em{' '}
+            . {t('description_terms')}{' '}
             <GoAlert
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
@@ -166,7 +176,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="altogrande_elevation"
             name="altogrande_elevation"
-            label="Elevação"
+            label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={true}
@@ -179,7 +189,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="altogrande_thickness"
             name="altogrande_thickness"
-            label="Espessura"
+            label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
@@ -192,7 +202,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="altogrande_head"
             name="altogrande_head"
-            label="Carga"
+            label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
@@ -207,7 +217,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="corrente_elevation"
             name="corrente_elevation"
-            label="Elevação"
+            label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
@@ -220,7 +230,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="corrente_thickness"
             name="corrente_thickness"
-            label="Espessura"
+            label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
@@ -233,7 +243,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <LayerSwitcher
             mapfile="corrente_head"
             name="corrente_head"
-            label="Carga"
+            label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
@@ -247,7 +257,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <div className="static-layers">
           <StaticLayerSwitcher
             name="hidrography"
-            label="Hidrografia"
+            label={t('label_hidrography')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
@@ -256,7 +266,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
           <StaticLayerSwitcher
             name="highways"
-            label="Rodovias"
+            label={t('label_highways')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
@@ -266,7 +276,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <StaticLayerSwitcher
             name="counties"
-            label="Municípios"
+            label={t('label_counties')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
@@ -276,7 +286,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <StaticLayerSwitcher
             name="watersheds"
-            label="Bacias hidrográficas"
+            label={t('label_watersheds')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={true}
             legendIsVisible={false}
@@ -286,7 +296,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
 
           <StaticLayerSwitcher
             name="urucuia"
-            label="Aquifero Urucuia"
+            label={t('label_urucuia')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={true}
             legendIsVisible={false}
@@ -298,14 +308,14 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
       </Content>
 
       <Footer ishidden={hidden}>
-        <Popover placement="right" content="Termos de uso">
+        <Popover placement="right" content={t('tooltip_terms')}>
           <GoAlert
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showTermsOfUseModal}
           />
         </Popover>
-        <Popover placement="right" content="Informações adicionais">
+        <Popover placement="right" content={t('tooltip_info')}>
           <FaInfoCircle
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
@@ -334,17 +344,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           </Button>,
         ]}
       >
-        <p style={{ textAlign: 'justify' }}>
-          O usuário assume todo o risco relacionado ao uso de informações nas
-          páginas Web desta plataforma. A UFV fornece essas informações da
-          maneira como estão apresentadas, e a UFV se isenta de todas e
-          quaisquer garantias, expressas ou implícitas, incluindo (mas não se
-          limitando a) quaisquer garantias implícitas de adequação a uma
-          finalidade específica. Em nenhum caso a UFV será responsável perante
-          usuários ou terceiros por quaisquer danos diretos, indiretos,
-          incidentais, conseqüenciais, especiais ou perda de lucro resultante de
-          qualquer uso ou uso indevido desses dados.
-        </p>
+        <p style={{ textAlign: 'justify' }}>{t('terms_of_use')}</p>
       </Modal>
 
       <Modal
@@ -368,17 +368,13 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           </Button>,
         ]}
       >
-        <p style={{ textAlign: 'justify' }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quis
-          magni cum accusamus nisi eligendi accusantium alias. Nobis ipsum eius
-          amet, asperiores magnam non! Ipsum ab officia quas perferendis nisi!
-        </p>
-        <p style={{ textAlign: 'justify' }}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur
-          consequuntur unde, iusto consequatur earum veniam! Minus sed eligendi
-          consequatur earum temporibus cupiditate nam. Modi mollitia dolore non
-          magni velit obcaecati!
-        </p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph01')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph02')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
       </Modal>
     </Container>
   );
