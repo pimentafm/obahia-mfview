@@ -1,7 +1,7 @@
 {
   "appname": "Groundwater Model Data Viewer",
   "description_title": "Description:",
-  "description_start": "This tool allows the customized visualization of the groundwater model for the Alto Grande Médio Grande, Corrente and Carinhanha river basins. More information about the flow model developed using the model",
+  "description_start": "This tool allows the customized visualization of the groundwater model results for the Alto Grande, Médio Grande, Corrente and Carinhanha river basins. More information about the flow model developed using the model",
   "description_end": "can be found at",
   "description_terms": "The use of this information implies acceptance of the disclaimer specified in",
   "label_grande": "Alto Grande River",

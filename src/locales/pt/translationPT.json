@@ -1,7 +1,7 @@
 {
   "appname": "Visualizador do Modelo de Fluxo de Águas Subterrâneas",
   "description_title": "Descrição:",
-  "description_start": "Esta ferramenta permite a visualização customizada do modelo de águas subterrâneas paras as bacias do Alto e Médio Rio Grande, Rio Corrente e Rio Carinhanha. Maiores informações sobre o modelo de fluxo desenvolvido com a utilização do modelo",
+  "description_start": "Esta ferramenta permite a visualização customizada dos resultados do modelo de águas subterrâneas para as bacias do Alto e Médio Rio Grande, Rio Corrente e Rio Carinhanha. Maiores informações sobre o modelo de fluxo desenvolvido com a utilização do modelo",
   "description_end": "podem ser encontradas em",
   "description_terms": "O uso dessas informações implica no aceite da exoneração de responsabilidade especificada em",
   "label_grande": "Alto Rio Grande",

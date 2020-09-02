@@ -43,14 +43,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
     'ftp://obahia.dea.ufv.br/modflow/',
   );
 
-  const [elevVisibleG, setElevVisibleG] = useState(true);
-  const [thickVisibleG, setThickVisibleG] = useState(false);
-  const [headVisibleG, setHeadVisibleG] = useState(false);
-
-  const [elevVisibleC, setElevVisibleC] = useState(false);
-  const [thickVisibleC, setThickVisibleC] = useState(false);
-  const [headVisibleC, setHeadVisibleC] = useState(false);
-
   const termsOfUse = HtmlParser(
     `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
       'modal_terms_title',
@@ -90,59 +82,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   }, [hidden]);
 
   const handleLayerVisibility = useCallback(
-    (e, id) => {
-      const lyr_name = id; //obj.target.name;
-
-      if (lyr_name === 'altogrande_elevation') {
-        setElevVisibleG(e);
-        setThickVisibleG(!e);
-        setHeadVisibleG(!e);
-      }
-
-      if (lyr_name === 'altogrande_thickness') {
-        setElevVisibleG(!e);
-        setThickVisibleG(e);
-        setHeadVisibleG(!e);
-      }
-
-      if (lyr_name === 'altogrande_head') {
-        setElevVisibleG(!e);
-        setThickVisibleG(!e);
-        setHeadVisibleG(e);
-      }
-
-      if (lyr_name === 'corrente_elevation') {
-        setElevVisibleC(e);
-        setThickVisibleC(!e);
-        setHeadVisibleC(!e);
-      }
-
-      if (lyr_name === 'corrente_thickness') {
-        setElevVisibleC(!e);
-        setThickVisibleC(e);
-        setHeadVisibleC(!e);
-      }
-
-      if (lyr_name === 'corrente_head') {
-        setElevVisibleC(!e);
-        setThickVisibleC(!e);
-        setHeadVisibleC(e);
-      }
-
-      map.getLayers().forEach(lyr => {
-        if (lyr.getClassName() !== 'ol-layer') {
-          if (lyr.get('name') === lyr_name) {
-            lyr.setVisible(e);
-          } else if (lyr.getClassName() === `${lyr_name.split('_')[0]}-layer`) {
-            lyr.setVisible(!e);
-          }
-        }
-      });
-    },
-    [map],
-  );
-
-  const handleStaticLayerVisibility = useCallback(
     (e, id) => {
       const lyr_name = id;
 
@@ -240,7 +179,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={elevVisibleG}
+            layerIsVisible={true}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -253,7 +192,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={thickVisibleG}
+            layerIsVisible={false}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -266,7 +205,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={headVisibleG}
+            layerIsVisible={false}
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
@@ -274,14 +213,55 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
         </Collapsible>
 
-        <Collapsible tabIndex={1} open={false} trigger="Rio Corrente">
+        <Collapsible tabIndex={1} open={false} trigger="Médio Rio Grande">
+          <LayerSwitcher
+            mapfile="mediogrande_elevation"
+            name="mediogrande_elevation"
+            label={t('label_elevation')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="mediogrande_thickness"
+            name="mediogrande_thickness"
+            label={t('label_thickness')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="mediogrande_head"
+            name="mediogrande_head"
+            label={t('label_head')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+          />
+        </Collapsible>
+
+        <Collapsible tabIndex={2} open={false} trigger="Rio Corrente">
           <LayerSwitcher
             mapfile="corrente_elevation"
             name="corrente_elevation"
             label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={elevVisibleC}
+            layerIsVisible={false}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -294,7 +274,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={thickVisibleC}
+            layerIsVisible={false}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -307,7 +287,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={headVisibleC}
+            layerIsVisible={false}
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
@@ -319,7 +299,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <StaticLayerSwitcher
             name="hidrography"
             label={t('label_hidrography')}
-            handleLayerVisibility={handleStaticLayerVisibility}
+            handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -328,7 +308,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <StaticLayerSwitcher
             name="highways"
             label={t('label_highways')}
-            handleLayerVisibility={handleStaticLayerVisibility}
+            handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -338,7 +318,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <StaticLayerSwitcher
             name="counties"
             label={t('label_counties')}
-            handleLayerVisibility={handleStaticLayerVisibility}
+            handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -348,7 +328,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <StaticLayerSwitcher
             name="watersheds"
             label={t('label_watersheds')}
-            handleLayerVisibility={handleStaticLayerVisibility}
+            handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={true}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -358,7 +338,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <StaticLayerSwitcher
             name="urucuia"
             label={t('label_urucuia')}
-            handleLayerVisibility={handleStaticLayerVisibility}
+            handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={true}
             legendIsVisible={false}
             layerInfoIsVisible={false}

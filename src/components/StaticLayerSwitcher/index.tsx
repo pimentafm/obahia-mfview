@@ -20,7 +20,7 @@ interface LayerSwitcherProps {
   legendIsVisible: boolean;
   layerInfoIsVisible: boolean;
   switchColor: string;
-  handleLayerVisibility(e: boolean, obj: Object): void;
+  handleLayerVisibility(e: boolean, obj: Record<string, unknown>): void;
 }
 
 const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
