@@ -23,6 +23,8 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
+import CardPlot from '../CardPlot';
+
 import Popup from '../../components/Popup';
 
 interface MapProps {
@@ -320,6 +322,8 @@ const Map: React.FC<MapProps> = () => {
   return (
     <Container id="map">
       <Menu ishidden={window.innerWidth <= 760 ? 1 : 0} map={map} />
+
+      <CardPlot year={2018} ishidden={window.innerWidth <= 760 ? 1 : 0} />
 
       <Popup
         map={map}

@@ -38,6 +38,13 @@
   "modal_info_paraghaph06": "paragraph06",
   "modal_info_paraghaph07": "paragraph07",
   "popup_clickout": "Out of layer",
-  "label_plot_yaxis": "YYYYYYY",
-  "barplot_title": "Energy Balance"
+  "label_plot_yaxis": "10<sup>10</sup> m³/year",
+  "barplot_title": "Energy Balance",
+  "label_storage": "Storage",
+  "label_constant_head": "Constant head",
+  "label_wells": "Wells",
+  "label_drains": "Drains",
+  "label_leakage": "River leakage",
+  "label_recharge": "Recharge",
+  "label_total": "Total"
 }
