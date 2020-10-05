@@ -40,7 +40,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
 
   const [downloadURL, setDownloadURL] = useState(
-    'ftp://obahia.dea.ufv.br/modflow/',
+    'ftp://obahia.dea.ufv.br/modflow/shapefiles/',
   );
 
   const termsOfUse = HtmlParser(
@@ -183,7 +183,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'alto-grande/alto-grande.zip'}
+            downloadURL={downloadURL + 'altogrande.zip'}
           />
 
           <LayerSwitcher
@@ -196,7 +196,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'alto-grande/alto-grande.zip'}
+            downloadURL={downloadURL + 'altogrande.zip'}
           />
 
           <LayerSwitcher
@@ -209,7 +209,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'alto-grande/alto-grande.zip'}
+            downloadURL={downloadURL + 'altogrande.zip'}
           />
         </Collapsible>
 
@@ -224,7 +224,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+            downloadURL={downloadURL + 'mediogrande.zip'}
           />
 
           <LayerSwitcher
@@ -237,7 +237,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+            downloadURL={downloadURL + 'mediogrande.zip'}
           />
 
           <LayerSwitcher
@@ -250,7 +250,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'medio-grande/medio-grande.zip'}
+            downloadURL={downloadURL + '/mediogrande.zip'}
           />
         </Collapsible>
 
@@ -265,7 +265,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'corrente/corrente.zip'}
+            downloadURL={downloadURL + 'corrente.zip'}
           />
 
           <LayerSwitcher
@@ -278,7 +278,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'corrente/corrente.zip'}
+            downloadURL={downloadURL + 'corrente.zip'}
           />
 
           <LayerSwitcher
@@ -291,7 +291,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
-            downloadURL={downloadURL + 'corrente/corrente.zip'}
+            downloadURL={downloadURL + 'corrente.zip'}
           />
         </Collapsible>
 
