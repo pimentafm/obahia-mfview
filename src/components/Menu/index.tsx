@@ -24,6 +24,8 @@ import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
 
+import DetailedAreasLink from '../DetailedAreasLink';
+
 import { useTranslation } from 'react-i18next';
 
 interface MenuProps {
@@ -292,6 +294,8 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             downloadURL={downloadURL + 'corrente.zip'}
           />
         </Collapsible>
+
+        <DetailedAreasLink />
 
         <div className="static-layers">
           <StaticLayerSwitcher
