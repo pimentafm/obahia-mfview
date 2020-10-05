@@ -65,7 +65,9 @@ const Barplot: React.FC<BarplotProps> = ({ ydtick, watershed }) => {
       y: balanceIn,
       name: 'IN',
       type: 'bar',
-      hovertemplate: '%{y:.5f} x 10<sup>10</sup> m<sup>3</sup><extra></extra>',
+      hovertemplate: `%{y:.2f} x 10<sup>6</sup> m<sup>3</sup>/${t(
+        'label_year',
+      )}<extra></extra>`,
       marker: { color: '#0000ff' },
     },
     {
@@ -73,7 +75,9 @@ const Barplot: React.FC<BarplotProps> = ({ ydtick, watershed }) => {
       y: balanceOut,
       name: 'OUT',
       type: 'bar',
-      hovertemplate: '%{y:.5f} x 10<sup>10</sup> m<sup>3</sup><extra></extra>',
+      hovertemplate: `%{y:.2f} x 10<sup>6</sup> m<sup>3</sup>/${t(
+        'label_year',
+      )}<extra></extra>`,
       marker: { color: '#ff0000' },
     },
   ];
