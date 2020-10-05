@@ -39,9 +39,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
 
-  const [downloadURL, setDownloadURL] = useState(
-    'ftp://obahia.dea.ufv.br/modflow/shapefiles/',
-  );
+  const [downloadURL, setDownloadURL] = useState('');
 
   const termsOfUse = HtmlParser(
     `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
@@ -106,7 +104,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   );
 
   useEffect(() => {
-    setDownloadURL(`ftp://obahia.dea.ufv.br/modflow/`);
+    setDownloadURL(`ftp://obahia.dea.ufv.br/modflow/shapefiles/`);
   }, []);
 
   return (
@@ -250,7 +248,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
-            downloadURL={downloadURL + '/mediogrande.zip'}
+            downloadURL={downloadURL + 'mediogrande.zip'}
           />
         </Collapsible>
 
