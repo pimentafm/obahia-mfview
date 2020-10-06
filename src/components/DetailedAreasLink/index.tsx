@@ -13,21 +13,21 @@ const DetailedAreasLink: React.FC = () => {
       <label>{t('label_zone_title')}</label>
       <div className="layer-div">
         <a
-          href="http://obahia.dea.ufv.br/landuse"
+          href="http://obahia.dea.ufv.br/layers/geonode:na_riogrande2018_2010"
           target="_blank"
           rel="noopener noreferrer"
         >
           {t('label_zone_1')}
         </a>
         <a
-          href="http://obahia.dea.ufv.br/landuse"
+          href="http://obahia.dea.ufv.br/layers/geonode:na_riogrande2018_2010"
           target="_blank"
           rel="noopener noreferrer"
         >
           {t('label_zone_2')}
         </a>
         <a
-          href="http://obahia.dea.ufv.br/landuse"
+          href="http://obahia.dea.ufv.br/layers/geonode:na_riogrande2018_2010"
           target="_blank"
           rel="noopener noreferrer"
         >
