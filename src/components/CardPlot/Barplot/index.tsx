@@ -89,7 +89,7 @@ const Barplot: React.FC<BarplotProps> = ({ ydtick, watershed }) => {
         size: 14,
       },
     },
-    height: 200,
+    height: 150,
     xaxis: {
       titlefont: {
         family: 'Arial, sans-serif',

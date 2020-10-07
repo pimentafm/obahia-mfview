@@ -172,47 +172,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           </span>
         </div>
 
-        <Collapsible tabIndex={0} open={true} trigger="Alto Rio Grande">
-          <LayerSwitcher
-            mapfile="altogrande_elevation"
-            name="altogrande_elevation"
-            label={t('label_elevation')}
-            handleLayerOpacity={handleLayerOpacity}
-            handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={true}
-            legendIsVisible={true}
-            layerInfoIsVisible={false}
-            switchColor="#1f5582"
-            downloadURL={downloadURL + 'altogrande.zip'}
-          />
-
-          <LayerSwitcher
-            mapfile="altogrande_thickness"
-            name="altogrande_thickness"
-            label={t('label_thickness')}
-            handleLayerOpacity={handleLayerOpacity}
-            handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
-            legendIsVisible={true}
-            layerInfoIsVisible={false}
-            switchColor="#1f5582"
-            downloadURL={downloadURL + 'altogrande.zip'}
-          />
-
-          <LayerSwitcher
-            mapfile="altogrande_head"
-            name="altogrande_head"
-            label={t('label_head')}
-            handleLayerOpacity={handleLayerOpacity}
-            handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
-            legendIsVisible={true}
-            layerInfoIsVisible={true}
-            switchColor="#1f5582"
-            downloadURL={downloadURL + 'altogrande.zip'}
-          />
-        </Collapsible>
-
         <Collapsible tabIndex={1} open={false} trigger="Médio Rio Grande">
           <LayerSwitcher
             mapfile="mediogrande_elevation"
@@ -251,6 +210,47 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             layerInfoIsVisible={true}
             switchColor="#1f5582"
             downloadURL={downloadURL + 'mediogrande.zip'}
+          />
+        </Collapsible>
+
+        <Collapsible tabIndex={0} open={true} trigger="Alto Rio Grande">
+          <LayerSwitcher
+            mapfile="altogrande_elevation"
+            name="altogrande_elevation"
+            label={t('label_elevation')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={true}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'altogrande.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="altogrande_thickness"
+            name="altogrande_thickness"
+            label={t('label_thickness')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'altogrande.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="altogrande_head"
+            name="altogrande_head"
+            label={t('label_head')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'altogrande.zip'}
           />
         </Collapsible>
 
