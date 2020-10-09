@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Switch from 'react-switch';
 
 import { IconContext } from 'react-icons';
@@ -40,14 +40,11 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [visible, setVisible] = useState(layerIsVisible);
-
   const handleVisibility = useCallback(
     (_e, _obj, id) => {
-      visible ? setVisible(false) : setVisible(true);
-      handleLayerVisibility(!visible, id);
+      handleLayerVisibility(!layerIsVisible, id);
     },
-    [visible, handleLayerVisibility],
+    [layerIsVisible, handleLayerVisibility],
   );
 
   const handleOpacity = useCallback(
@@ -61,7 +58,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 
   if (legendIsVisible) {
     legend = (
-      <Legend mapfile={mapfile} name={name} isvisible={visible}></Legend>
+      <Legend mapfile={mapfile} name={name} isvisible={layerIsVisible}></Legend>
     );
   }
 
@@ -119,12 +116,13 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 
           <Switch
             id={name}
-            checked={visible}
+            checked={layerIsVisible}
             handleDiameter={16}
             onChange={handleVisibility}
             onColor={switchColor}
             checkedIcon={false}
             uncheckedIcon={false}
+            disabled={layerIsVisible}
             height={22}
             width={44}
           />

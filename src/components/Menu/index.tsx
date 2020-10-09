@@ -24,8 +24,6 @@ import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
 
-// import DetailedAreasLink from '../DetailedAreasLink';
-
 import { useTranslation } from 'react-i18next';
 
 interface MenuProps {
@@ -42,6 +40,18 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
 
   const [downloadURL, setDownloadURL] = useState('');
+
+  const [elevVisibleM, setElevVisibleM] = useState(false);
+  const [thickVisibleM, setThickVisibleM] = useState(false);
+  const [headVisibleM, setHeadVisibleM] = useState(false);
+
+  const [elevVisibleG, setElevVisibleG] = useState(true);
+  const [thickVisibleG, setThickVisibleG] = useState(false);
+  const [headVisibleG, setHeadVisibleG] = useState(false);
+
+  const [elevVisibleC, setElevVisibleC] = useState(false);
+  const [thickVisibleC, setThickVisibleC] = useState(false);
+  const [headVisibleC, setHeadVisibleC] = useState(false);
 
   const termsOfUse = HtmlParser(
     `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
@@ -84,10 +94,67 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   const handleLayerVisibility = useCallback(
     (e, id) => {
       const lyr_name = id;
+      if (lyr_name === 'mediogrande_elevation') {
+        setElevVisibleM(e);
+        setThickVisibleM(!e);
+        setHeadVisibleM(!e);
+      }
+
+      if (lyr_name === 'mediogrande_thickness') {
+        setElevVisibleM(!e);
+        setThickVisibleM(e);
+        setHeadVisibleM(!e);
+      }
+
+      if (lyr_name === 'mediogrande_head') {
+        setElevVisibleM(!e);
+        setThickVisibleM(!e);
+        setHeadVisibleM(e);
+      }
+
+      if (lyr_name === 'altogrande_elevation') {
+        setElevVisibleG(e);
+        setThickVisibleG(!e);
+        setHeadVisibleG(!e);
+      }
+
+      if (lyr_name === 'altogrande_thickness') {
+        setElevVisibleG(!e);
+        setThickVisibleG(e);
+        setHeadVisibleG(!e);
+      }
+
+      if (lyr_name === 'altogrande_head') {
+        setElevVisibleG(!e);
+        setThickVisibleG(!e);
+        setHeadVisibleG(e);
+      }
+
+      if (lyr_name === 'corrente_elevation') {
+        setElevVisibleC(e);
+        setThickVisibleC(!e);
+        setHeadVisibleC(!e);
+      }
+
+      if (lyr_name === 'corrente_thickness') {
+        setElevVisibleC(!e);
+        setThickVisibleC(e);
+        setHeadVisibleC(!e);
+      }
+
+      if (lyr_name === 'corrente_head') {
+        setElevVisibleC(!e);
+        setThickVisibleC(!e);
+        setHeadVisibleC(e);
+      }
 
       map.getLayers().forEach(lyr => {
-        if (lyr.get('name') === lyr_name) {
-          lyr.setVisible(e);
+        if (lyr.getClassName() !== 'ol-layer') {
+          if (lyr.get('name') === lyr_name) {
+            lyr.setVisible(e);
+          } else if (lyr.getClassName() === `${lyr_name.split('_')[0]}-layer`) {
+            lyr.setVisible(!e);
+          }
         }
       });
     },
@@ -179,7 +246,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={elevVisibleM}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -192,7 +259,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={thickVisibleM}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -206,7 +273,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
-            legendIsVisible={true}
+            legendIsVisible={headVisibleM}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
             downloadURL={downloadURL + 'mediogrande.zip'}
@@ -220,7 +287,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={true}
+            layerIsVisible={elevVisibleG}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -233,7 +300,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={thickVisibleG}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -246,7 +313,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={headVisibleG}
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
@@ -261,7 +328,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_elevation')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={elevVisibleC}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -274,7 +341,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_thickness')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={thickVisibleC}
             legendIsVisible={true}
             layerInfoIsVisible={false}
             switchColor="#1f5582"
@@ -287,7 +354,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
+            layerIsVisible={headVisibleC}
             legendIsVisible={true}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
