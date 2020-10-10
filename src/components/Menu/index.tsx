@@ -285,8 +285,8 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             label={t('label_head')}
             handleLayerOpacity={handleLayerOpacity}
             handleLayerVisibility={handleLayerVisibility}
-            layerIsVisible={false}
-            legendIsVisible={headVisibleM}
+            layerIsVisible={headVisibleM}
+            legendIsVisible={false}
             layerInfoIsVisible={true}
             switchColor="#1f5582"
             downloadURL={downloadURL + 'mediogrande.zip'}
