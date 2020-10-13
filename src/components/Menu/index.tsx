@@ -26,6 +26,9 @@ import { Container, Header, Footer, Content } from './styles';
 
 import { useTranslation } from 'react-i18next';
 
+import SAUGeral from '../../assets/images/SAU_Geral.png';
+import SAUBacias from '../../assets/images/SAU_Bacias.png';
+
 interface MenuProps {
   ishidden: number;
   map: OlMap;
@@ -493,7 +496,38 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
       >
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph01')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph02')}</p>
+
+        <img
+          style={{
+            marginBottom: '10px',
+            marginLeft: '25%',
+            width: '50%',
+          }}
+          src={SAUGeral}
+          alt="Anomalous accumulation"
+        />
+        <p style={{ textAlign: 'justify' }}>
+          <b>{t('modal_info_figure')} </b>
+          {t('modal_info_figure_legend_01')}
+        </p>
+
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
+
+        <img
+          width="50%"
+          style={{
+            marginBottom: '10px',
+            marginLeft: '25%',
+            width: '50%',
+          }}
+          src={SAUBacias}
+          alt="Anomalous accumulation"
+        />
+        <p style={{ textAlign: 'justify' }}>
+          <b>{t('modal_info_figure')} </b>
+          {t('modal_info_figure_legend_02')}
+        </p>
+
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
