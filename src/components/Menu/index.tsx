@@ -531,7 +531,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
       </Modal>
     </Container>
   );
