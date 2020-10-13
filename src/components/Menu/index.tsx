@@ -528,9 +528,86 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           {t('modal_info_figure_legend_02')}
         </p>
 
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_paraghaph04')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            ADD LINK HERE
+          </a>
+        </p>
+
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_paraghaph05')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Alto Grande
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Médio Grande
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Corrente
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Carinhanha
+          </a>
+        </p>
+
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_paraghaph06')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Zona 01
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Zona 02
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/"
+          >
+            {' '}
+            Zona n
+          </a>
+        </p>
       </Modal>
     </Container>
   );
