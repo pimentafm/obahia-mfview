@@ -42,7 +42,7 @@ const CardPlot: React.FC<CardProps> = ({ year, ishidden }) => {
 
       <Content>
         <label>{` ${t('barplot_title')} - Médio Grande`}</label>
-        <Barplot ydtick={30000} watershed="mediogrande" />
+        <Barplot ydtick={15000} watershed="mediogrande" />
 
         <label>{` ${t('barplot_title')} - Alto Grande`}</label>
         <Barplot ydtick={30000} watershed="grande" />
