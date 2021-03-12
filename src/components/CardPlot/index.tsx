@@ -50,8 +50,8 @@ const CardPlot: React.FC<CardProps> = ({ year, ishidden }) => {
         <label>{` ${t('barplot_title')} - Corrente`}</label>
         <Barplot ydtick={1000} watershed="corrente" />
 
-        {/* <label>{` ${t('barplot_title')} - Carinhanha`}</label>
-        <Barplot ydtick={2} watershed="carinhanha" /> */}
+        <label>{` ${t('barplot_title')} - Carinhanha`}</label>
+        <Barplot ydtick={2} watershed="carinhanha" />
         <div className="final-space"></div>
       </Content>
     </Container>
