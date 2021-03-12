@@ -63,6 +63,16 @@ const Map: React.FC<MapProps> = () => {
     new TileLayer({ visible: false, className: 'corrente-layer' }),
   );
 
+  const [carinhanha_elevation] = useState(
+    new TileLayer({ visible: false, className: 'carinhanha-layer' }),
+  );
+  const [carinhanha_thickness] = useState(
+    new TileLayer({ visible: false, className: 'carinhanha-layer' }),
+  );
+  const [carinhanha_head] = useState(
+    new TileLayer({ visible: false, className: 'carinhanha-layer' }),
+  );
+
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
@@ -107,6 +117,9 @@ const Map: React.FC<MapProps> = () => {
         corrente_head,
         corrente_thickness,
         corrente_elevation,
+        carinhanha_head,
+        carinhanha_thickness,
+        carinhanha_elevation,
         watersheds,
         counties,
         highways,
@@ -259,6 +272,36 @@ const Map: React.FC<MapProps> = () => {
     crossOrigin: 'anonymous',
   });
 
+  const carinhanha_elevation_source = new TileWMS({
+    url: wms.defaults.baseURL + 'carinhanha_elevation.map',
+    params: {
+      LAYERS: 'elevation',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
+  const carinhanha_thickness_source = new TileWMS({
+    url: wms.defaults.baseURL + 'carinhanha_thickness.map',
+    params: {
+      LAYERS: 'thickness',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
+  const carinhanha_head_source = new TileWMS({
+    url: wms.defaults.baseURL + 'carinhanha_head.map',
+    params: {
+      LAYERS: 'head',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+    crossOrigin: 'anonymous',
+  });
+
   urucuia.set('name', 'urucuia');
   urucuia.setSource(urucuia_source);
   urucuia.getSource().refresh();
@@ -315,6 +358,18 @@ const Map: React.FC<MapProps> = () => {
   corrente_head.setSource(corrente_head_source);
   corrente_head.getSource().refresh();
 
+  carinhanha_elevation.set('name', 'carinhanha_elevation');
+  carinhanha_elevation.setSource(carinhanha_elevation_source);
+  carinhanha_elevation.getSource().refresh();
+
+  carinhanha_thickness.set('name', 'carinhanha_thickness');
+  carinhanha_thickness.setSource(carinhanha_thickness_source);
+  carinhanha_thickness.getSource().refresh();
+
+  carinhanha_head.set('name', 'carinhanha_head');
+  carinhanha_head.setSource(carinhanha_head_source);
+  carinhanha_head.getSource().refresh();
+
   useEffect(() => {
     map.setTarget('map');
   });
@@ -337,6 +392,9 @@ const Map: React.FC<MapProps> = () => {
           corrente_elevation_source,
           corrente_thickness_source,
           corrente_head_source,
+          carinhanha_elevation_source,
+          carinhanha_thickness_source,
+          carinhanha_head_source,
         ]}
       />
 

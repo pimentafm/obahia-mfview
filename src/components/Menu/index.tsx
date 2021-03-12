@@ -56,6 +56,10 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
   const [thickVisibleC, setThickVisibleC] = useState(false);
   const [headVisibleC, setHeadVisibleC] = useState(false);
 
+  const [elevVisibleCa, setElevVisibleCa] = useState(false);
+  const [thickVisibleCa, setThickVisibleCa] = useState(false);
+  const [headVisibleCa, setHeadVisibleCa] = useState(false);
+
   const termsOfUse = HtmlParser(
     `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
       'modal_terms_title',
@@ -149,6 +153,24 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         setElevVisibleC(!e);
         setThickVisibleC(!e);
         setHeadVisibleC(e);
+      }
+
+      if (lyr_name === 'carinhanha_elevation') {
+        setElevVisibleCa(e);
+        setThickVisibleCa(!e);
+        setHeadVisibleCa(!e);
+      }
+
+      if (lyr_name === 'carinhanha_thickness') {
+        setElevVisibleCa(!e);
+        setThickVisibleCa(e);
+        setHeadVisibleCa(!e);
+      }
+
+      if (lyr_name === 'carinhanha_head') {
+        setElevVisibleCa(!e);
+        setThickVisibleCa(!e);
+        setHeadVisibleCa(e);
       }
 
       map.getLayers().forEach(lyr => {
@@ -378,6 +400,47 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           />
         </Collapsible>
 
+        <Collapsible tabIndex={2} open={false} trigger="Rio Carinhanha">
+          <LayerSwitcher
+            mapfile="carinhanha_elevation"
+            name="carinhanha_elevation"
+            label={t('label_elevation')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={elevVisibleCa}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'carinhanha.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="carinhanha_thickness"
+            name="carinhanha_thickness"
+            label={t('label_thickness')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={thickVisibleCa}
+            legendIsVisible={true}
+            layerInfoIsVisible={false}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'carinhanha.zip'}
+          />
+
+          <LayerSwitcher
+            mapfile="carinhanha_head"
+            name="carinhanha_head"
+            label={t('label_head')}
+            handleLayerOpacity={handleLayerOpacity}
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={headVisibleCa}
+            legendIsVisible={true}
+            layerInfoIsVisible={true}
+            switchColor="#1f5582"
+            downloadURL={downloadURL + 'carinhanha.zip'}
+          />
+        </Collapsible>
+
         {/* <DetailedAreasLink /> */}
 
         <div className="static-layers">
@@ -543,43 +606,39 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
         <p style={{ textAlign: 'justify' }}>
           {t('modal_info_paraghaph05')}
           <a
-            target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="ftp://obahia.dea.ufv.br/modflow/models/model_altogrande.zip"
           >
             {' '}
             Alto Grande
           </a>
           ,
           <a
-            target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="ftp://obahia.dea.ufv.br/modflow/models/model_mediogrande.zip"
           >
             {' '}
             Médio Grande
           </a>
           ,
           <a
-            target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="ftp://obahia.dea.ufv.br/modflow/models/model_corrente.zip"
           >
             {' '}
             Corrente
           </a>
           ,
           <a
-            target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="ftp://obahia.dea.ufv.br/modflow/models/model_carinhanha.zip"
           >
             {' '}
             Carinhanha
           </a>
         </p>
 
-        <p style={{ textAlign: 'justify' }}>
+        {/* <p style={{ textAlign: 'justify' }}>
           {t('modal_info_paraghaph06')}
           <a
             target="_blank"
@@ -607,7 +666,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
             {' '}
             Zona n
           </a>
-        </p>
+        </p> */}
       </Modal>
     </Container>
   );
