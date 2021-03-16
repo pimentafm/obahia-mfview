@@ -12,10 +12,9 @@ import { useTranslation } from 'react-i18next';
 
 interface CardProps {
   ishidden: number;
-  year: number;
 }
 
-const CardPlot: React.FC<CardProps> = ({ year, ishidden }) => {
+const CardPlot: React.FC<CardProps> = ({ ishidden }) => {
   const { t } = useTranslation();
 
   const [hidden, setHidden] = useState(ishidden);

@@ -378,7 +378,7 @@ const Map: React.FC<MapProps> = () => {
     <Container id="map">
       <Menu ishidden={window.innerWidth <= 760 ? 1 : 0} map={map} />
 
-      <CardPlot year={2018} ishidden={window.innerWidth <= 760 ? 1 : 0} />
+      <CardPlot ishidden={window.innerWidth <= 760 ? 1 : 0} />
 
       <Popup
         map={map}
