@@ -559,7 +559,6 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
       >
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph01')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph02')}</p>
-
         <img
           style={{
             marginBottom: '10px',
@@ -573,9 +572,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <b>{t('modal_info_figure')} </b>
           {t('modal_info_figure_legend_01')}
         </p>
-
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
-
         <img
           width="50%"
           style={{
@@ -590,19 +587,7 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           <b>{t('modal_info_figure')} </b>
           {t('modal_info_figure_legend_02')}
         </p>
-
-        <p style={{ textAlign: 'justify' }}>
-          {t('modal_info_paraghaph04')}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
-          >
-            {' '}
-            ADD LINK HERE
-          </a>
-        </p>
-
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>
           {t('modal_info_paraghaph05')}
           <a
@@ -638,35 +623,44 @@ const Menu: React.FC<MenuProps> = ({ ishidden, map, ...rest }) => {
           </a>
         </p>
 
-        {/* <p style={{ textAlign: 'justify' }}>
+        <p style={{ textAlign: 'justify' }}>
           {t('modal_info_paraghaph06')}
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="http://obahia.dea.ufv.br/documents/402"
           >
             {' '}
-            Zona 01
+            Regional
           </a>
           ,
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="http://obahia.dea.ufv.br/documents/401"
           >
             {' '}
-            Zona 02
+            Rio Grande
           </a>
           ,
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://obahia.dea.ufv.br/"
+            href="http://obahia.dea.ufv.br/documents/400"
           >
             {' '}
-            Zona n
+            Rio Corrente
           </a>
-        </p> */}
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://obahia.dea.ufv.br/documents/399"
+          >
+            {' '}
+            Rio Branco
+          </a>
+        </p>
       </Modal>
     </Container>
   );
